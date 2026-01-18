@@ -1,0 +1,30 @@
+/* Tailwind CSS v3 directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Define CSS variables */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+}
