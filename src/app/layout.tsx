@@ -19,8 +19,13 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Himkala Adventure - Himalayan Trekking Tours",
-  description: "Your adventure starts here",
+  title: "Free Walking Tour Kathmandu- Himkala Adventure",
+  description: "Discover Kathmandu city with the first Walking Tour of Nepal/Kathmandu",
+  icons: {
+    icon: '/himkala-logo.png?v=3',
+    shortcut: '/himkala-logo.png?v=3',
+    apple: '/himkala-logo.png?v=3',
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${playfairDisplay.variable}`}>
       <head>
+        {/* Cache busting with version number */}
+        <link rel="icon" href="/himkala-logo.png?v=4" type="image/png" />
+        <link rel="shortcut icon" href="/himkala-logo.png?v=4" type="image/png" />
+        <link rel="apple-touch-icon" href="/himkala-logo.png?v=4" />
+        
         <Script
           id="orchids-browser-logs"
           strategy="afterInteractive"
@@ -51,7 +61,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased font-sans">
         <ErrorReporter />
-        {children} {/* ← This is missing in your layout! */}
+        {children}
       </body>
     </html>
   );
