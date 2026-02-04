@@ -245,6 +245,19 @@ export default function FreeWalkingTourPage() {
   const highlightsContainerRef = useRef<HTMLDivElement>(null);
   const tourStopsContainerRef = useRef<HTMLDivElement>(null);
   
+  // Add touch event handlers to prevent horizontal page scroll
+  const preventHorizontalScroll = (e: React.TouchEvent) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    
+    // If we're at the start or end, prevent scrolling
+    if (scrollLeft <= 0 || scrollLeft >= scrollWidth - clientWidth) {
+      e.stopPropagation();
+    }
+  };
+
   // Mobile card scrolling
   const scrollHighlights = (direction: 'left' | 'right') => {
     if (!highlightsContainerRef.current) return;
@@ -276,7 +289,7 @@ export default function FreeWalkingTourPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ 
+    <div className="min-h-screen overflow-x-hidden" style={{ 
       backgroundColor: elegantColors.cream
     }}>
       {/* Floating WhatsApp Button - Glow Effect */}
@@ -606,8 +619,14 @@ export default function FreeWalkingTourPage() {
               
               <div 
                 ref={highlightsContainerRef}
+                onTouchStart={preventHorizontalScroll}
+                onTouchMove={preventHorizontalScroll}
                 className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                style={{ 
+                  scrollbarWidth: 'none', 
+                  msOverflowStyle: 'none',
+                  overscrollBehaviorX: 'contain'
+                }}
               >
                 {highlights.map((highlight, i) => (
                   <div 
@@ -640,6 +659,7 @@ export default function FreeWalkingTourPage() {
                         left: i * (cardWidth + 16),
                         behavior: 'smooth'
                       });
+                      setCurrentHighlightIndex(i);
                     }
                   }}
                   className={`w-2 h-2 rounded-full ${i === currentHighlightIndex ? 'bg-[#C4A65C]' : 'bg-[#FFFAF4]'}`}
@@ -701,8 +721,14 @@ export default function FreeWalkingTourPage() {
               
               <div 
                 ref={tourStopsContainerRef}
+                onTouchStart={preventHorizontalScroll}
+                onTouchMove={preventHorizontalScroll}
                 className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                style={{ 
+                  scrollbarWidth: 'none', 
+                  msOverflowStyle: 'none',
+                  overscrollBehaviorX: 'contain'
+                }}
               >
                 {tourStops.map((stop, i) => (
                   <div 
@@ -748,6 +774,7 @@ export default function FreeWalkingTourPage() {
                         left: i * (cardWidth + 16),
                         behavior: 'smooth'
                       });
+                      setCurrentTourStopIndex(i);
                     }
                   }}
                   className={`w-2 h-2 rounded-full ${i === currentTourStopIndex ? 'bg-[#C4A65C]' : 'bg-white/50'}`}
@@ -858,8 +885,14 @@ export default function FreeWalkingTourPage() {
           </div>
 
           {/* Horizontal Flow Animation for Mobile */}
-          <div className="md:hidden overflow-hidden relative py-4">
-            <div className="flex animate-infinite-scroll-slow-mobile">
+          <div className="md:hidden overflow-hidden relative py-4" 
+               style={{ overscrollBehavior: 'contain' }}
+          >
+            <div 
+              className="flex animate-infinite-scroll-slow-mobile"
+              onTouchStart={preventHorizontalScroll}
+              onTouchMove={preventHorizontalScroll}
+            >
               {infiniteTestimonials.map((testimonial, i) => (
                 <div
                   key={`${testimonial.name}-${i}`}
@@ -1174,6 +1207,18 @@ export default function FreeWalkingTourPage() {
 
         .snap-start {
           scroll-snap-align: start;
+        }
+
+        /* Only prevent horizontal page scroll */
+        body {
+          overflow-x: hidden;
+          position: relative;
+        }
+
+        /* Keep vertical scroll working */
+        html {
+          overflow-x: hidden;
+          overflow-y: scroll;
         }
       `}</style>
     </div>
