@@ -1147,7 +1147,7 @@ export default function FreeWalkingTourPage() {
                   className="bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] hover:from-[#B89A52] hover:to-[#9F5B50] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform"
                 >
                   <Compass className="mr-2 w-4 h-4 md:w-5 md:h-5" />
-                  Visit Himkala Adventure for More Tours & Treks
+                  Visit Himkala Adventure
                 </Button>
               </Link>
             </div>
