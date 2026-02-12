@@ -51,33 +51,30 @@ const WhatsAppIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-// Updated Elegant Neutral Color Palette
+// Updated Color Palette - #57192E, #B3172C, #38425B, #232D46, #181D31
 const elegantColors = {
-  // Core palette from your request
-  cream: "#FFFAF4",      // Main cream/off-white
-  sand: "#D8D0BD",       // Warm sand/beige
-  taupe: "#565448",      // Medium taupe/grey-brown
-  charcoal: "#11120D",   // Deep charcoal/almost black
+  // Core palette
+  deepMaroon: "#57192E",    // Deep burgundy/maroon
+  brightRed: "#B3172C",     // Bright crimson red
+  steelBlue: "#38425B",     // Muted steel blue
+  darkBlue: "#232D46",      // Dark navy blue
+  charcoalBlue: "#181D31",  // Deep charcoal blue
   
-  // Complementary colors
-  warmWhite: "#FFFDF9",  // Warmer white
-  lightSand: "#E5DFD0",  // Lighter sand
-  mediumTaupe: "#6B675A", // Medium taupe
-  darkTaupe: "#3D3B32",   // Dark taupe
-  gold: "#C4A65C",       // Warm gold accent
-  terraCotta: "#B36A5E",  // Terra cotta accent
-  sage: "#8A9B8C",       // Soft sage green
-  slate: "#7D8CA3",      // Cool slate blue
+  // Complementary colors (derived from palette)
+  warmWhite: "#FFFDF9",     // Warmer white
+  lightGray: "#E5E7EB",    // Light gray for backgrounds
+  mediumGray: "#9CA3AF",   // Medium gray for text
+  gold: "#C4A65C",         // Warm gold accent (keeping for contrast)
   
   // Gradients
   gradients: {
-    creamSand: "linear-gradient(135deg, #FFFAF4 0%, #D8D0BD 100%)",
-    sandTaupe: "linear-gradient(135deg, #D8D0BD 0%, #565448 100%)",
-    taupeCharcoal: "linear-gradient(135deg, #565448 0%, #11120D 100%)",
-    creamToWarm: "linear-gradient(135deg, #FFFAF4 0%, #FFFDF9 100%)",
-    goldAccent: "linear-gradient(135deg, #C4A65C 0%, #B36A5E 100%)",
-    neutralMist: "linear-gradient(135deg, #E5DFD0 0%, #D8D0BD 100%)",
-    deepElegant: "linear-gradient(135deg, #3D3B32 0%, #11120D 100%)",
+    maroonRed: "linear-gradient(135deg, #57192E 0%, #B3172C 100%)",
+    blueSteel: "linear-gradient(135deg, #38425B 0%, #232D46 100%)",
+    darkBlueCharcoal: "linear-gradient(135deg, #232D46 0%, #181D31 100%)",
+    creamToWarm: "linear-gradient(135deg, #FFFDF9 0%, #E5E7EB 100%)",
+    goldAccent: "linear-gradient(135deg, #C4A65C 0%, #B3172C 100%)",
+    neutralMist: "linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%)",
+    deepElegant: "linear-gradient(135deg, #181D31 0%, #232D46 100%)",
   }
 };
 
@@ -290,7 +287,7 @@ export default function FreeWalkingTourPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ 
-      backgroundColor: elegantColors.cream
+      backgroundColor: elegantColors.warmWhite
     }}>
       {/* Floating WhatsApp Button - Glow Effect */}
       <a 
@@ -308,7 +305,7 @@ export default function FreeWalkingTourPage() {
       <div className="md:hidden fixed bottom-24 right-6 z-40">
         <a 
           href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
-          className="w-12 h-12 rounded-full bg-gradient-to-r from-[#565448] to-[#3D3B32] flex items-center justify-center shadow-2xl shadow-[#565448]/50 hover:shadow-[#565448]/70 hover:scale-110 active:scale-95 transition-all"
+          className="w-12 h-12 rounded-full bg-gradient-to-r from-[#57192E] to-[#232D46] flex items-center justify-center shadow-2xl shadow-[#57192E]/50 hover:shadow-[#57192E]/70 hover:scale-110 active:scale-95 transition-all"
           aria-label="Call us"
         >
           <Phone className="w-5 h-5 text-white" />
@@ -317,7 +314,7 @@ export default function FreeWalkingTourPage() {
 
       {/* Hero Section - Mobile Optimized */}
       <section ref={heroRef} className="relative h-[85vh] min-h-[500px] max-h-[700px] md:max-h-[800px] overflow-hidden">
-        <div className="absolute inset-0" style={{ background: elegantColors.gradients.taupeCharcoal }}>
+        <div className="absolute inset-0" style={{ background: elegantColors.gradients.darkBlueCharcoal }}>
           <Image
             src="/images/FWT-4.avif"
             alt="Kathmandu Durbar Square"
@@ -327,7 +324,7 @@ export default function FreeWalkingTourPage() {
             sizes="100vw"
           />
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#11120D]/30 via-[#565448]/20 to-[#D8D0BD]/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#181D31]/30 via-[#232D46]/20 to-[#38425B]/10" />
         </div>
         
         <div className="absolute inset-0 flex items-center pt-4 md:pt-0">
@@ -365,7 +362,7 @@ export default function FreeWalkingTourPage() {
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Link href="/contact" className="flex-1">
-                  <Button size="lg" className="w-full bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] hover:from-[#B89A52] hover:to-[#9F5B50] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
+                  <Button size="lg" className="w-full bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
                     <Heart className="mr-2 w-4 h-4 md:w-5 md:h-5" /> Book Your Spot
                   </Button>
                 </Link>
@@ -386,7 +383,7 @@ export default function FreeWalkingTourPage() {
       {/* Stats Banner - Mobile Optimized */}
       <section className="relative z-10 px-4">
         <div className="container mx-auto">
-          <div className="bg-gradient-to-r from-[#565448] to-[#3D3B32] rounded-xl md:rounded-2xl p-4 md:p-8 -mt-8 md:-mt-16 shadow-xl">
+          <div className="bg-gradient-to-r from-[#38425B] to-[#232D46] rounded-xl md:rounded-2xl p-4 md:p-8 -mt-8 md:-mt-16 shadow-xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {[
                 { value: "350+", label: "Reviews", icon: <MessageCircle className="w-4 h-4 md:w-5 md:h-5" /> },
@@ -409,22 +406,22 @@ export default function FreeWalkingTourPage() {
 
       {/* About Section */}
       <section id="tour-details" className="py-12 md:py-24" style={{ 
-        backgroundColor: elegantColors.cream 
+        backgroundColor: elegantColors.warmWhite 
       }}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="md:grid md:grid-cols-2 md:gap-12 md:items-center">
             <div>
-              <Badge className="mb-4 bg-gradient-to-r from-[#C4A65C]/20 to-[#D8D0BD]/20 text-[#565448] border-[#C4A65C]/40 py-1.5 px-3 text-sm font-semibold">
+              <Badge className="mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#57192E] border-[#B3172C]/40 py-1.5 px-3 text-sm font-semibold">
                 <Waves className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The First of Its Kind
               </Badge>
-              <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-4">
+              <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-4">
                 Experience Kathmandu
-                <span className="block text-[#565448] italic">Like a Local</span>
+                <span className="block text-[#38425B] italic">Like a Local</span>
               </h2>
-              <div className="space-y-3 md:space-y-4 text-[#3D3B32]">
+              <div className="space-y-3 md:space-y-4 text-[#232D46]">
                 <p className="text-base md:text-lg">
                   <strong>Free Tour Kathmandu</strong> is the first of its kind in the Kathmandu Valley. 
-                  Led by a guide with <span className="text-[#565448] font-semibold">decades of experience</span>.
+                  Led by a guide with <span className="text-[#57192E] font-semibold">decades of experience</span>.
                 </p>
                 <p className="text-base md:text-lg">
                   Explore iconic temples, stupas, monasteries, palaces, and local Newar architecture 
@@ -433,15 +430,15 @@ export default function FreeWalkingTourPage() {
               </div>
 
               <div className="mt-6 md:mt-8 grid grid-cols-2 gap-3 md:gap-4">
-                <div className="bg-gradient-to-br from-[#C4A65C]/10 to-[#FFFAF4]/20 p-3 md:p-4 rounded-lg md:rounded-xl border border-[#C4A65C]/20">
-                  <Users className="w-6 h-6 md:w-8 md:h-8 text-[#565448]" />
-                  <div className="text-base md:text-xl font-bold text-[#11120D]">Small Groups</div>
-                  <div className="text-xs md:text-sm text-[#3D3B32]">Personalized experience</div>
+                <div className="bg-gradient-to-br from-[#B3172C]/10 to-[#57192E]/20 p-3 md:p-4 rounded-lg md:rounded-xl border border-[#B3172C]/20">
+                  <Users className="w-6 h-6 md:w-8 md:h-8 text-[#57192E]" />
+                  <div className="text-base md:text-xl font-bold text-[#181D31]">Small Groups</div>
+                  <div className="text-xs md:text-sm text-[#232D46]">Personalized experience</div>
                 </div>
-                <div className="bg-gradient-to-br from-[#C4A65C]/10 to-[#FFFAF4]/20 p-3 md:p-4 rounded-lg md:rounded-xl border border-[#C4A65C]/20">
-                  <Compass className="w-6 h-6 md:w-8 md:h-8 text-[#565448]" />
-                  <div className="text-base md:text-xl font-bold text-[#11120D]">Local Guides</div>
-                  <div className="text-xs md:text-sm text-[#3D3B32]">Born & raised in Kathmandu</div>
+                <div className="bg-gradient-to-br from-[#B3172C]/10 to-[#57192E]/20 p-3 md:p-4 rounded-lg md:rounded-xl border border-[#B3172C]/20">
+                  <Compass className="w-6 h-6 md:w-8 md:h-8 text-[#57192E]" />
+                  <div className="text-base md:text-xl font-bold text-[#181D31]">Local Guides</div>
+                  <div className="text-xs md:text-sm text-[#232D46]">Born & raised in Kathmandu</div>
                 </div>
               </div>
             </div>
@@ -456,7 +453,7 @@ export default function FreeWalkingTourPage() {
                     className="object-cover"
                     sizes="25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#565448]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B]/20 to-transparent" />
                 </div>
                 <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
                   <Image
@@ -466,7 +463,7 @@ export default function FreeWalkingTourPage() {
                     className="object-cover"
                     sizes="25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#565448]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B]/20 to-transparent" />
                 </div>
               </div>
               <div className="space-y-4 pt-8">
@@ -478,7 +475,7 @@ export default function FreeWalkingTourPage() {
                     className="object-cover"
                     sizes="25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#565448]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B]/20 to-transparent" />
                 </div>
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
@@ -488,7 +485,7 @@ export default function FreeWalkingTourPage() {
                     className="object-cover"
                     sizes="25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#565448]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B]/20 to-transparent" />
                 </div>
               </div>
             </div>
@@ -497,42 +494,42 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Tour Times - Mobile Optimized */}
-      <section className="py-12 md:py-24 bg-gradient-to-r from-[#D8D0BD]/20 to-[#FFFAF4]/40">
+      <section className="py-12 md:py-24 bg-gradient-to-r from-[#38425B]/20 to-[#57192E]/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-3 md:mb-4">
               Choose Your Tour Time
             </h2>
-            <p className="text-[#3D3B32] text-sm md:text-lg">
+            <p className="text-[#232D46] text-sm md:text-lg">
               We offer two convenient times daily to explore Kathmandu
             </p>
           </div>
 
           <div className="space-y-4 md:grid md:grid-cols-2 md:gap-8 max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-white to-[#FFFAF4] border-[#D8D0BD]/20 shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
+            <Card className="bg-gradient-to-br from-white to-[#FFFDF9] border-[#38425B]/20 shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
               <CardContent className="p-5 md:p-8">
                 <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#FFFAF4] to-[#C4A65C]/20 rounded-lg md:rounded-xl flex items-center justify-center">
-                    <Sun className="w-6 h-6 md:w-8 md:h-8 text-[#565448]" />
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#FFFDF9] to-[#B3172C]/20 rounded-lg md:rounded-xl flex items-center justify-center">
+                    <Sun className="w-6 h-6 md:w-8 md:h-8 text-[#57192E]" />
                   </div>
                   <div>
-                    <h3 className="text-lg md:text-2xl font-serif text-[#11120D]">Morning Tour</h3>
-                    <div className="text-2xl md:text-3xl font-bold text-[#565448]">9:00 AM</div>
+                    <h3 className="text-lg md:text-2xl font-serif text-[#181D31]">Morning Tour</h3>
+                    <div className="text-2xl md:text-3xl font-bold text-[#57192E]">9:00 AM</div>
                   </div>
                 </div>
-                <p className="text-[#3D3B32] text-sm md:text-base mb-4 md:mb-6">
+                <p className="text-[#232D46] text-sm md:text-base mb-4 md:mb-6">
                   Start your day with cool morning air exploring Kathmandu's awakening streets. Perfect for photographers with soft morning light.
                 </p>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Cooler temperatures</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Better photography light</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Less crowded markets</span>
                   </div>
@@ -540,30 +537,30 @@ export default function FreeWalkingTourPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-white to-[#FFFAF4] border-[#D8D0BD]/20 shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
+            <Card className="bg-gradient-to-br from-white to-[#FFFDF9] border-[#38425B]/20 shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
               <CardContent className="p-5 md:p-8">
                 <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#11120D] to-[#565448] rounded-lg md:rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#181D31] to-[#232D46] rounded-lg md:rounded-xl flex items-center justify-center">
                     <Sunset className="w-6 h-6 md:w-8 md:h-8 text-[#C4A65C]" />
                   </div>
                   <div>
-                    <h3 className="text-lg md:text-2xl font-serif text-[#11120D]">Afternoon Tour</h3>
-                    <div className="text-2xl md:text-3xl font-bold text-[#565448]">2:00 PM</div>
+                    <h3 className="text-lg md:text-2xl font-serif text-[#181D31]">Afternoon Tour</h3>
+                    <div className="text-2xl md:text-3xl font-bold text-[#57192E]">2:00 PM</div>
                   </div>
                 </div>
-                <p className="text-[#3D3B32] text-sm md:text-base mb-4 md:mb-6">
+                <p className="text-[#232D46] text-sm md:text-base mb-4 md:mb-6">
                   Experience bustling markets and sunset views from Swayambhunath. The energy peaks as locals go about their day.
                 </p>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Vibrant market atmosphere</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Sunset at Monkey Temple</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#565448]">
+                  <div className="flex items-center gap-2 text-[#57192E]">
                     <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                     <span className="text-xs md:text-sm">Perfect for late risers</span>
                   </div>
@@ -573,10 +570,10 @@ export default function FreeWalkingTourPage() {
           </div>
 
           <div className="text-center mt-6 md:mt-12">
-            <div className="inline-flex items-center gap-2 md:gap-3 bg-white text-[#11120D] rounded-full px-4 md:px-6 py-2 md:py-3 shadow-lg border border-[#FFFAF4]">
-              <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#C4A65C]" />
+            <div className="inline-flex items-center gap-2 md:gap-3 bg-white text-[#181D31] rounded-full px-4 md:px-6 py-2 md:py-3 shadow-lg border border-[#FFFDF9]">
+              <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#B3172C]" />
               <span className="text-xs md:text-sm font-medium">Meeting Point: Garden of Dreams, Thamel</span>
-              <Badge className="bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] text-white ml-1 md:ml-2 text-xs">Easy</Badge>
+              <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white ml-1 md:ml-2 text-xs">Easy</Badge>
             </div>
           </div>
         </div>
@@ -584,17 +581,17 @@ export default function FreeWalkingTourPage() {
 
       {/* Trip Highlights - Mobile Horizontal Scrollable */}
       <section id="highlights" className="py-12 md:py-24" style={{ 
-        backgroundColor: elegantColors.cream 
+        backgroundColor: elegantColors.warmWhite 
       }}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#C4A65C]/20 to-[#D8D0BD]/20 text-[#565448] border-[#C4A65C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
+            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#57192E] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-2" /> What You'll Experience
             </Badge>
-            <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-3 md:mb-4">
               Trip Highlights
             </h2>
-            <p className="text-[#3D3B32] text-sm md:text-lg">
+            <p className="text-[#232D46] text-sm md:text-lg">
               Discover the best of Kathmandu's rich heritage and culture
             </p>
           </div>
@@ -604,14 +601,14 @@ export default function FreeWalkingTourPage() {
             <div className="relative">
               <button
                 onClick={() => scrollHighlights('left')}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#11120D]"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
                 aria-label="Scroll left"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => scrollHighlights('right')}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#11120D]"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
                 aria-label="Scroll right"
               >
                 <ChevronRightIcon className="w-4 h-4" />
@@ -633,13 +630,13 @@ export default function FreeWalkingTourPage() {
                     key={i}
                     className="highlight-card w-[280px] flex-shrink-0 snap-start"
                   >
-                    <Card className="bg-white border-[#FFFAF4] h-full">
+                    <Card className="bg-white border-[#FFFDF9] h-full">
                       <CardContent className="p-5">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#C4A65C]/20 to-[#FFFAF4]/40 rounded-lg flex items-center justify-center text-[#565448] mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#B3172C]/20 to-[#57192E]/10 rounded-lg flex items-center justify-center text-[#57192E] mb-4">
                           {highlight.icon}
                         </div>
-                        <h4 className="text-base font-bold text-[#11120D] mb-2">{highlight.title}</h4>
-                        <p className="text-[#3D3B32] text-sm leading-relaxed">{highlight.description}</p>
+                        <h4 className="text-base font-bold text-[#181D31] mb-2">{highlight.title}</h4>
+                        <p className="text-[#232D46] text-sm leading-relaxed">{highlight.description}</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -662,7 +659,7 @@ export default function FreeWalkingTourPage() {
                       setCurrentHighlightIndex(i);
                     }
                   }}
-                  className={`w-2 h-2 rounded-full ${i === currentHighlightIndex ? 'bg-[#C4A65C]' : 'bg-[#FFFAF4]'}`}
+                  className={`w-2 h-2 rounded-full ${i === currentHighlightIndex ? 'bg-[#B3172C]' : 'bg-[#38425B]/20'}`}
                   aria-label={`Go to highlight ${i + 1}`}
                 />
               ))}
@@ -672,13 +669,13 @@ export default function FreeWalkingTourPage() {
           {/* Desktop Grid Layout */}
           <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {highlights.map((highlight, i) => (
-              <Card key={i} className="bg-white border-[#FFFAF4] hover:border-[#C4A65C] hover:shadow-lg transition-all duration-300 h-full">
+              <Card key={i} className="bg-white border-[#FFFDF9] hover:border-[#B3172C] hover:shadow-lg transition-all duration-300 h-full">
                 <CardContent className="p-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-[#C4A65C]/20 to-[#FFFAF4]/40 rounded-xl flex items-center justify-center text-[#565448] mb-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#B3172C]/20 to-[#57192E]/10 rounded-xl flex items-center justify-center text-[#57192E] mb-4">
                     {highlight.icon}
                   </div>
-                  <h4 className="text-xl font-bold text-[#11120D] mb-3">{highlight.title}</h4>
-                  <p className="text-[#3D3B32] leading-relaxed">{highlight.description}</p>
+                  <h4 className="text-xl font-bold text-[#181D31] mb-3">{highlight.title}</h4>
+                  <p className="text-[#232D46] leading-relaxed">{highlight.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -687,10 +684,10 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Tour Route - Mobile Horizontal Scrollable */}
-      <section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#11120D] to-[#565448]">
+      <section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#C4A65C]/20 to-[#D8D0BD]/20 text-[#C4A65C] border-[#C4A65C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
+            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#C4A65C] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
               <Compass className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The Journey
             </Badge>
             <h2 className="text-2xl md:text-4xl font-serif text-white mb-3 md:mb-4">
@@ -706,14 +703,14 @@ export default function FreeWalkingTourPage() {
             <div className="relative">
               <button
                 onClick={() => scrollTourStops('left')}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#11120D]"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
                 aria-label="Scroll left"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => scrollTourStops('right')}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#11120D]"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
                 aria-label="Scroll right"
               >
                 <ChevronRightIcon className="w-4 h-4" />
@@ -743,14 +740,14 @@ export default function FreeWalkingTourPage() {
                         className="object-cover"
                         sizes="300px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#565448] via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
                       <div className="absolute top-3 left-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-[#C4A65C] to-[#B36A5E] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-sm">
                           {i + 1}
                         </div>
                       </div>
                       <div className="absolute bottom-3 left-3 right-3">
-                        <Badge className="bg-[#C4A65C]/20 text-[#C4A65C] border-none text-xs mb-1">
+                        <Badge className="bg-[#B3172C]/20 text-[#C4A65C] border-none text-xs mb-1">
                           {stop.type}
                         </Badge>
                         <h4 className="text-base font-bold text-white">{stop.name}</h4>
@@ -777,7 +774,7 @@ export default function FreeWalkingTourPage() {
                       setCurrentTourStopIndex(i);
                     }
                   }}
-                  className={`w-2 h-2 rounded-full ${i === currentTourStopIndex ? 'bg-[#C4A65C]' : 'bg-white/50'}`}
+                  className={`w-2 h-2 rounded-full ${i === currentTourStopIndex ? 'bg-[#B3172C]' : 'bg-white/50'}`}
                   aria-label={`Go to stop ${i + 1}`}
                 />
               ))}
@@ -796,14 +793,14 @@ export default function FreeWalkingTourPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#565448] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#C4A65C] to-[#B36A5E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       {i + 1}
                     </div>
                   </div>
                   <div className="absolute bottom-4 left-4 right-4">
-                    <Badge className="bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] text-white border-none text-xs mb-2">
+                    <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white border-none text-xs mb-2">
                       {stop.type}
                     </Badge>
                     <h4 className="text-lg font-bold text-white">{stop.name}</h4>
@@ -817,20 +814,20 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Special Experiences */}
-      <section className="py-12 md:py-24 bg-gradient-to-b from-[#FFFAF4] to-[#D8D0BD]/20">
+      <section className="py-12 md:py-24 bg-gradient-to-b from-[#FFFDF9] to-[#38425B]/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-3 md:mb-4">
               Unique Cultural Encounters
             </h2>
-            <p className="text-[#3D3B32] text-sm md:text-lg">
+            <p className="text-[#232D46] text-sm md:text-lg">
               Memorable experiences that make our tour special
             </p>
           </div>
 
           <div className="space-y-6 md:grid md:grid-cols-2 md:gap-8">
             {specialExperiences.map((exp, i) => (
-              <Card key={i} className="bg-white border-[#FFFAF4] shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
+              <Card key={i} className="bg-white border-[#FFFDF9] shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
                 <div className="md:flex h-full">
                   <div className="md:w-2/5 relative h-48 md:h-auto">
                     <Image
@@ -840,13 +837,13 @@ export default function FreeWalkingTourPage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 40vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#565448]/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#57192E]/10 to-transparent" />
                   </div>
                   <CardContent className="p-5 md:p-6 md:w-3/5 flex flex-col">
-                    <h4 className="text-lg md:text-xl font-serif text-[#11120D] mb-3">{exp.name}</h4>
-                    <p className="text-[#3D3B32] text-sm md:text-base leading-relaxed flex-grow mb-3 md:mb-4">{exp.description}</p>
+                    <h4 className="text-lg md:text-xl font-serif text-[#181D31] mb-3">{exp.name}</h4>
+                    <p className="text-[#232D46] text-sm md:text-base leading-relaxed flex-grow mb-3 md:mb-4">{exp.description}</p>
                     {exp.price && (
-                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C4A65C]/20 to-[#FFFAF4]/30 text-[#565448] rounded-full px-3 md:px-4 py-1.5 md:py-2 border border-[#C4A65C]/30 w-fit">
+                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#B3172C]/20 to-[#57192E]/10 text-[#57192E] rounded-full px-3 md:px-4 py-1.5 md:py-2 border border-[#B3172C]/30 w-fit">
                         <Coffee className="w-3 h-3 md:w-4 md:h-4" />
                         <span className="text-sm md:text-base font-semibold">{exp.price}</span>
                       </div>
@@ -861,14 +858,14 @@ export default function FreeWalkingTourPage() {
 
       {/* Reviews - Horizontal Flow Animation */}
       <section id="reviews" className="py-12 md:py-24" style={{ 
-        backgroundColor: elegantColors.cream 
+        backgroundColor: elegantColors.warmWhite 
       }}>
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#C4A65C]/20 to-[#D8D0BD]/20 text-[#565448] border-[#C4A65C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
-              <Star className="w-3 h-3 md:w-4 md:h-4 mr-1.5 fill-[#565448]" /> TESTIMONIALS
+            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#57192E] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
+              <Star className="w-3 h-3 md:w-4 md:h-4 mr-1.5 fill-[#57192E]" /> TESTIMONIALS
             </Badge>
-            <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-4 md:mb-6">
               What Travelers Say
             </h2>
             <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
@@ -877,9 +874,9 @@ export default function FreeWalkingTourPage() {
                   <Star key={i} className="w-4 h-4 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
-              <span className="text-[#565448] font-bold text-sm md:text-lg">94% Excellent Rating</span>
+              <span className="text-[#57192E] font-bold text-sm md:text-lg">94% Excellent Rating</span>
             </div>
-            <p className="text-[#3D3B32] text-sm md:text-lg">
+            <p className="text-[#232D46] text-sm md:text-lg">
               Out of over 350 reviews on TripAdvisor, 94% rate the Free Walking Tour as 'Excellent'
             </p>
           </div>
@@ -898,21 +895,21 @@ export default function FreeWalkingTourPage() {
                   key={`${testimonial.name}-${i}`}
                   className="flex-shrink-0 w-[85vw] mr-6"
                 >
-                  <div className="bg-gradient-to-b from-white to-[#FFFAF4] rounded-xl overflow-hidden border border-[#FFFAF4] p-5 h-full">
+                  <div className="bg-gradient-to-b from-white to-[#FFFDF9] rounded-xl overflow-hidden border border-[#FFFDF9] p-5 h-full">
                     <div className="flex gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <p className="text-[#3D3B32] italic mb-6 leading-relaxed text-sm">
+                    <p className="text-[#232D46] italic mb-6 leading-relaxed text-sm">
                       &ldquo;{testimonial.text}&rdquo;
                     </p>
                     <div className="flex flex-col gap-2">
-                      <div className="font-bold text-base text-[#11120D]">{testimonial.name}</div>
-                      <div className="text-[#565448] text-xs flex items-center gap-1">
+                      <div className="font-bold text-base text-[#181D31]">{testimonial.name}</div>
+                      <div className="text-[#57192E] text-xs flex items-center gap-1">
                         <Globe className="w-3 h-3" /> {testimonial.country}
                       </div>
-                      <Badge className="bg-gradient-to-r from-[#C4A65C]/10 to-[#FFFAF4]/10 text-[#565448] text-xs w-fit">
+                      <Badge className="bg-gradient-to-r from-[#B3172C]/10 to-[#57192E]/5 text-[#57192E] text-xs w-fit">
                         Free Walking Tour
                       </Badge>
                     </div>
@@ -930,21 +927,21 @@ export default function FreeWalkingTourPage() {
                   key={`${testimonial.name}-${i}`}
                   className="flex-shrink-0 w-[400px] mr-8"
                 >
-                  <div className="bg-gradient-to-b from-white to-[#FFFAF4] rounded-2xl overflow-hidden border border-[#FFFAF4] p-8 h-full">
+                  <div className="bg-gradient-to-b from-white to-[#FFFDF9] rounded-2xl overflow-hidden border border-[#FFFDF9] p-8 h-full">
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <p className="text-[#3D3B32] italic mb-8 leading-relaxed text-base">
+                    <p className="text-[#232D46] italic mb-8 leading-relaxed text-base">
                       &ldquo;{testimonial.text}&rdquo;
                     </p>
                     <div className="flex flex-col gap-2">
-                      <div className="font-bold text-lg text-[#11120D]">{testimonial.name}</div>
-                      <div className="text-[#565448] text-sm flex items-center gap-1">
+                      <div className="font-bold text-lg text-[#181D31]">{testimonial.name}</div>
+                      <div className="text-[#57192E] text-sm flex items-center gap-1">
                         <Globe className="w-3 h-3" /> {testimonial.country}
                       </div>
-                      <Badge className="bg-gradient-to-r from-[#C4A65C]/10 to-[#FFFAF4]/10 text-[#565448] text-xs w-fit">
+                      <Badge className="bg-gradient-to-r from-[#B3172C]/10 to-[#57192E]/5 text-[#57192E] text-xs w-fit">
                         Free Walking Tour
                       </Badge>
                     </div>
@@ -957,23 +954,23 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Cost Section */}
-      <section className="py-12 md:py-24 bg-gradient-to-br from-[#FFFAF4]/60 to-[#D8D0BD]/20">
+      <section className="py-12 md:py-24 bg-gradient-to-br from-[#FFFDF9]/60 to-[#38425B]/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-4xl font-serif text-[#11120D] mb-3 md:mb-4">
+              <h2 className="text-2xl md:text-4xl font-serif text-[#181D31] mb-3 md:mb-4">
                 What's Included
               </h2>
-              <p className="text-[#3D3B32] text-sm md:text-lg">
+              <p className="text-[#232D46] text-sm md:text-lg">
                 Clear and transparent pricing for your convenience
               </p>
             </div>
 
             <div className="space-y-4 md:grid md:grid-cols-2 md:gap-8">
-              <Card className="bg-gradient-to-br from-[#11120D] to-[#565448] border-none shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
+              <Card className="bg-gradient-to-br from-[#181D31] to-[#232D46] border-none shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
                 <CardContent className="p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-4 md:mb-6">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#C4A65C] to-[#B36A5E] rounded-lg md:rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-lg md:rounded-xl flex items-center justify-center">
                       <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
                     <h3 className="text-lg md:text-2xl font-bold text-white">Cost Includes</h3>
@@ -995,13 +992,13 @@ export default function FreeWalkingTourPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border-[#FFFAF4] shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
+              <Card className="bg-white border-[#FFFDF9] shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden">
                 <CardContent className="p-5 md:p-8">
                   <div className="flex items-center gap-3 mb-4 md:mb-6">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-white to-[#FFFAF4] border border-[#565448]/30 rounded-lg md:rounded-xl flex items-center justify-center">
-                      <XCircle className="w-5 h-5 md:w-6 md:h-6 text-[#565448]" />
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-white to-[#FFFDF9] border border-[#57192E]/30 rounded-lg md:rounded-xl flex items-center justify-center">
+                      <XCircle className="w-5 h-5 md:w-6 md:h-6 text-[#57192E]" />
                     </div>
-                    <h3 className="text-lg md:text-2xl font-bold text-[#11120D]">Cost Excludes</h3>
+                    <h3 className="text-lg md:text-2xl font-bold text-[#181D31]">Cost Excludes</h3>
                   </div>
                   <ul className="space-y-3 md:space-y-4 mb-6 md:mb-8">
                     {[
@@ -1011,21 +1008,21 @@ export default function FreeWalkingTourPage() {
                       "Transportation to/from meeting point",
                       "Travel insurance",
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[#3D3B32]">
-                        <XCircle className="w-4 h-4 md:w-5 md:h-5 text-[#565448]/50 shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-3 text-[#232D46]">
+                        <XCircle className="w-4 h-4 md:w-5 md:h-5 text-[#57192E]/50 shrink-0 mt-0.5" />
                         <span className="text-sm md:text-base">{item}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="p-4 md:p-6 bg-gradient-to-r from-[#C4A65C]/10 to-[#FFFAF4]/20 rounded-lg md:rounded-xl border border-[#C4A65C]/20">
+                  <div className="p-4 md:p-6 bg-gradient-to-r from-[#B3172C]/10 to-[#57192E]/5 rounded-lg md:rounded-xl border border-[#B3172C]/20">
                     <div className="flex items-start gap-3 md:gap-4">
-                      <div className="w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br from-[#C4A65C] to-[#B36A5E] rounded-lg md:rounded-xl flex items-center justify-center">
+                      <div className="w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-lg md:rounded-xl flex items-center justify-center">
                         <Gift className="w-5 h-5 md:w-7 md:h-7 text-white" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-base md:text-lg text-[#11120D] mb-1 md:mb-2">Tips-Based Model</h4>
-                        <p className="text-[#3D3B32] text-xs md:text-sm">
+                        <h4 className="font-bold text-base md:text-lg text-[#181D31] mb-1 md:mb-2">Tips-Based Model</h4>
+                        <p className="text-[#232D46] text-xs md:text-sm">
                           Award your guide based on your satisfaction. No fixed fee. This model ensures our guides are motivated to provide the best experience possible.
                         </p>
                       </div>
@@ -1039,7 +1036,7 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-12 md:py-24 bg-gradient-to-b from-[#11120D] to-[#565448] relative overflow-hidden">
+      <section className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <Image
             src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=1200&auto=format&fit=crop"
@@ -1062,7 +1059,7 @@ export default function FreeWalkingTourPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-8 md:mb-12">
               <Link href="/contact" className="sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] hover:from-[#B89A52] hover:to-[#9F5B50] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
+                <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
                   <Heart className="mr-2 w-4 h-4 md:w-5 md:h-5" /> Book Your Tour
                 </Button>
               </Link>
@@ -1100,7 +1097,7 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Footer - Bigger logo version with marketing button */}
-      <footer className="py-8 md:py-12 bg-gradient-to-b from-[#11120D] to-[#565448]">
+      <footer className="py-8 md:py-12 bg-gradient-to-b from-[#181D31] to-[#232D46]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 mb-6 md:mb-8">
@@ -1144,7 +1141,7 @@ export default function FreeWalkingTourPage() {
               <Link href="https://himkalaadventure.com" target="_blank" rel="noopener noreferrer">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#C4A65C] to-[#B36A5E] hover:from-[#B89A52] hover:to-[#9F5B50] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform"
+                  className="bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform"
                 >
                   <Compass className="mr-2 w-4 h-4 md:w-5 md:h-5" />
                   Visit Himkala Adventure
