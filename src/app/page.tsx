@@ -618,6 +618,18 @@ export default function FreeWalkingTourPage() {
                 ref={highlightsContainerRef}
                 onTouchStart={preventHorizontalScroll}
                 onTouchMove={preventHorizontalScroll}
+                onScroll={(e) => {
+                  const container = e.currentTarget;
+                  const scrollPosition = container.scrollLeft;
+                  const cardWidth = container.querySelector('.highlight-card')?.clientWidth || 280;
+                  const gap = 16;
+                  const totalCardWidth = cardWidth + gap;
+                  
+                  const newIndex = Math.round(scrollPosition / totalCardWidth);
+                  const boundedIndex = Math.min(Math.max(newIndex, 0), highlights.length - 1);
+                  
+                  setCurrentHighlightIndex(boundedIndex);
+                }}
                 className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
                 style={{ 
                   scrollbarWidth: 'none', 
@@ -684,134 +696,146 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Tour Route - Mobile Horizontal Scrollable */}
-<section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46]">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#C4A65C] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
-        <Compass className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The Journey
-      </Badge>
-      <h2 className="text-2xl md:text-4xl font-serif text-white mb-3 md:mb-4">
-        Journey Through Ancient Kathmandu
-      </h2>
-      <p className="text-white/70 text-sm md:text-lg">
-        Follow our curated route through 8 incredible stops
-      </p>
-    </div>
+      <section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46]">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#C4A65C] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
+              <Compass className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The Journey
+            </Badge>
+            <h2 className="text-2xl md:text-4xl font-serif text-white mb-3 md:mb-4">
+              Journey Through Ancient Kathmandu
+            </h2>
+            <p className="text-white/70 text-sm md:text-lg">
+              Follow our curated route through 8 incredible stops
+            </p>
+          </div>
 
-    {/* Mobile Horizontal Scrollable with Arrows */}
-    <div className="md:hidden relative">
-      <div className="relative">
-        <button
-          onClick={() => scrollTourStops('left')}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => scrollTourStops('right')}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
-          aria-label="Scroll right"
-        >
-          <ChevronRightIcon className="w-4 h-4" />
-        </button>
-        
-        <div 
-          ref={tourStopsContainerRef}
-          onTouchStart={preventHorizontalScroll}
-          onTouchMove={preventHorizontalScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
-          style={{ 
-            scrollbarWidth: 'none', 
-            msOverflowStyle: 'none',
-            overscrollBehaviorX: 'contain'
-          }}
-        >
-          {tourStops.map((stop, i) => (
-            <div 
-              key={i}
-              className="tourstop-card w-[300px] flex-shrink-0 snap-start"
-            >
-              <div className="relative h-48 rounded-xl overflow-hidden mb-3">
-                <Image
-                  src={stop.image}
-                  alt={stop.name}
-                  fill
-                  className="object-cover"
-                  sizes="300px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {i + 1}
+          {/* Mobile Horizontal Scrollable with Arrows */}
+          <div className="md:hidden relative">
+            <div className="relative">
+              <button
+                onClick={() => scrollTourStops('left')}
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => scrollTourStops('right')}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
+                aria-label="Scroll right"
+              >
+                <ChevronRightIcon className="w-4 h-4" />
+              </button>
+              
+              <div 
+                ref={tourStopsContainerRef}
+                onTouchStart={preventHorizontalScroll}
+                onTouchMove={preventHorizontalScroll}
+                onScroll={(e) => {
+                  const container = e.currentTarget;
+                  const scrollPosition = container.scrollLeft;
+                  const cardWidth = container.querySelector('.tourstop-card')?.clientWidth || 300;
+                  const gap = 16;
+                  const totalCardWidth = cardWidth + gap;
+                  
+                  const newIndex = Math.round(scrollPosition / totalCardWidth);
+                  const boundedIndex = Math.min(Math.max(newIndex, 0), tourStops.length - 1);
+                  
+                  setCurrentTourStopIndex(boundedIndex);
+                }}
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
+                style={{ 
+                  scrollbarWidth: 'none', 
+                  msOverflowStyle: 'none',
+                  overscrollBehaviorX: 'contain'
+                }}
+              >
+                {tourStops.map((stop, i) => (
+                  <div 
+                    key={i}
+                    className="tourstop-card w-[300px] flex-shrink-0 snap-start"
+                  >
+                    <div className="relative h-48 rounded-xl overflow-hidden mb-3">
+                      <Image
+                        src={stop.image}
+                        alt={stop.name}
+                        fill
+                        className="object-cover"
+                        sizes="300px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                          {i + 1}
+                        </div>
+                      </div>
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <Badge className="bg-[#B3172C]/20 text-[#C4A65C] border-none text-xs mb-1">
+                          {stop.type}
+                        </Badge>
+                        <h4 className="text-base font-bold text-white">{stop.name}</h4>
+                      </div>
+                    </div>
+                    <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
                   </div>
-                </div>
-                <div className="absolute bottom-3 left-3 right-3">
-                  <Badge className="bg-[#B3172C]/20 text-[#C4A65C] border-none text-xs mb-1">
-                    {stop.type}
-                  </Badge>
-                  <h4 className="text-base font-bold text-white">{stop.name}</h4>
-                </div>
-              </div>
-              <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Scroll indicator dots */}
-      <div className="flex justify-center gap-2 mt-4">
-        {tourStops.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              if (tourStopsContainerRef.current) {
-                const cardWidth = tourStopsContainerRef.current.querySelector('.tourstop-card')?.clientWidth || 300;
-                tourStopsContainerRef.current.scrollTo({
-                  left: i * (cardWidth + 16),
-                  behavior: 'smooth'
-                });
-                setCurrentTourStopIndex(i);
-              }
-            }}
-            className={`w-2 h-2 rounded-full transition-colors duration-300 ${i === currentTourStopIndex ? 'bg-[#B3172C]' : 'bg-white/50'}`}
-            aria-label={`Go to stop ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-
-    {/* Desktop Grid Layout */}
-    <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {tourStops.map((stop, i) => (
-        <div key={i} className="group">
-          <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-            <Image
-              src={stop.image}
-              alt={stop.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              sizes="25vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
-            <div className="absolute top-4 left-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                {i + 1}
+                ))}
               </div>
             </div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white border-none text-xs mb-2">
-                {stop.type}
-              </Badge>
-              <h4 className="text-lg font-bold text-white">{stop.name}</h4>
+            
+            {/* Scroll indicator dots */}
+            <div className="flex justify-center gap-2 mt-4">
+              {tourStops.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (tourStopsContainerRef.current) {
+                      const cardWidth = tourStopsContainerRef.current.querySelector('.tourstop-card')?.clientWidth || 300;
+                      tourStopsContainerRef.current.scrollTo({
+                        left: i * (cardWidth + 16),
+                        behavior: 'smooth'
+                      });
+                      setCurrentTourStopIndex(i);
+                    }
+                  }}
+                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${i === currentTourStopIndex ? 'bg-[#B3172C]' : 'bg-white/50'}`}
+                  aria-label={`Go to stop ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
-          <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
+
+          {/* Desktop Grid Layout */}
+          <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {tourStops.map((stop, i) => (
+              <div key={i} className="group">
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+                  <Image
+                    src={stop.image}
+                    alt={stop.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                      {i + 1}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white border-none text-xs mb-2">
+                      {stop.type}
+                    </Badge>
+                    <h4 className="text-lg font-bold text-white">{stop.name}</h4>
+                  </div>
+                </div>
+                <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Special Experiences */}
       <section className="py-12 md:py-24 bg-gradient-to-b from-[#FFFDF9] to-[#38425B]/10">
