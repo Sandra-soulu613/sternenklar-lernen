@@ -115,49 +115,49 @@ const tourStops = [
   {
     name: "Garden of Dreams",
     type: "Starting Point",
-    image: "https://images.unsplash.com/photo-1582654291505-56e9c2e62e7c?q=80&w=600&auto=format&fit=crop",
+    image: "/images/garden.avif",
     description: "Meet your guide outside this peaceful oasis in Thamel.",
   },
   {
     name: "Kathesimbhu Stupa",
     type: "Buddhist Heritage",
-    image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=600&auto=format&fit=crop",
+    image: "/images/kathesimbu.avif",
     description: "Smaller replica of Swayambhunath in the heart of old city.",
   },
   {
     name: "Glass Beads Market",
     type: "Cultural Experience",
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=600&auto=format&fit=crop",
+    image: "/images/beads.avif",
     description: "Colorful glass beads made for generations for Hindu ceremonies.",
   },
   {
     name: "Indra Chowk Market",
     type: "Local Life",
-    image: "https://images.unsplash.com/photo-1558862107-d49ef2a04d72?q=80&w=600&auto=format&fit=crop",
+    image: "/images/indrachowk.avif",
     description: "One of Kathmandu's busiest intersections with vibrant markets.",
   },
   {
     name: "Durbar Square Area",
     type: "UNESCO Heritage",
-    image: "https://images.unsplash.com/photo-1558799401-1dcba79f095c?q=80&w=600&auto=format&fit=crop",
+    image: "/images/durbar_square.avif",
     description: "Historic palace square with stunning Malla-era temples.",
   },
   {
     name: "Newari Neighbourhood",
     type: "Hidden Gem",
-    image: "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=600&auto=format&fit=crop",
+    image: "/images/harati.avif",
     description: "Sleepy traditional streets where time stands still.",
   },
   {
-    name: "Vishnumati River",
+    name: "Cremation Site",
     type: "Sacred Site",
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=600&auto=format&fit=crop",
+    image: "/images/cremation.avif",
     description: "Witness local cremation ghats similar to the Ganges.",
   },
   {
     name: "Monkey Temple",
     type: "Final Destination",
-    image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=600&auto=format&fit=crop",
+    image: "/images/swoyambhu.avif",
     description: "Climb 424 steps to the ancient stupa with valley views.",
   },
 ];
@@ -165,23 +165,23 @@ const tourStops = [
 const specialExperiences = [
   {
     name: "Kathe Swoyambhu",
-    image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=600&auto=format&fit=crop",
+    image: "/images/kathesimbu.avif",
     description: "Learn about Hindu, Buddhist and Tibetan cultures at this photogenic stupa.",
   },
   {
     name: "Local Lassi Experience",
-    image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=600&auto=format&fit=crop",
+    image: "/images/lassi.avif",
     description: "Try famous local lassi near glass-bead market. Refreshing must-try drink.",
     price: "NPR 40-70",
   },
   {
     name: "Glass Beads Market",
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=600&auto=format&fit=crop",
+    image: "/images/beads.avif",
     description: "Spectacular market where Muslim minority make colorful glass beads for Hindu weddings.",
   },
   {
     name: "Monkey Temple",
-    image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=600&auto=format&fit=crop",
+    image: "/images/monkey_temple.avif",
     description: "Climb 424 steps for majestic Kathmandu skyline views. Hundreds of resident monkeys!",
   },
 ];
@@ -229,7 +229,7 @@ const testimonials = [
 const infiniteTestimonials = [...testimonials, ...testimonials];
 
 // WhatsApp booking link
-const WHATSAPP_LINK = "https://wa.me/9779841376470?text=Hi%21%20I%27m%20interested%20in%20booking%20the%20Free%20Walking%20Tour%20in%20Kathmandu%20for%20";
+const WHATSAPP_LINK = "https://wa.me/9779841376470?text=Hi%21%20I%27m%20interested%20in%20booking%20the%20Free%20Walking%20Tour%20in%20Kathmandu.%20";
 // Phone number for calling
 const PHONE_NUMBER = "tel:+9779841376470";
 // Instagram link
@@ -386,8 +386,8 @@ export default function FreeWalkingTourPage() {
           <div className="bg-gradient-to-r from-[#38425B] to-[#232D46] rounded-xl md:rounded-2xl p-4 md:p-8 -mt-8 md:-mt-16 shadow-xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {[
-                { value: "350+", label: "Reviews", icon: <MessageCircle className="w-4 h-4 md:w-5 md:h-5" /> },
-                { value: "94%", label: "Excellent", icon: <Star className="w-4 h-4 md:w-5 md:h-5 fill-[#C4A65C]" /> },
+                { value: "500+", label: "Reviews", icon: <MessageCircle className="w-4 h-4 md:w-5 md:h-5" /> },
+                { value: "97%", label: "Excellence", icon: <Star className="w-4 h-4 md:w-5 md:h-5 fill-[#C4A65C]" /> },
                 { value: "7", label: "Days/Week", icon: <Calendar className="w-4 h-4 md:w-5 md:h-5" /> },
                 { value: "FREE", label: "Tips-Based", icon: <Gift className="w-4 h-4 md:w-5 md:h-5" /> },
               ].map((stat, i) => (
@@ -447,7 +447,7 @@ export default function FreeWalkingTourPage() {
               <div className="space-y-4">
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=600&auto=format&fit=crop"
+                    src="/images/buddhist_temple.avif"
                     alt="Buddhist Stupa"
                     fill
                     className="object-cover"
@@ -457,7 +457,7 @@ export default function FreeWalkingTourPage() {
                 </div>
                 <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.unsplash.com/photo-1558799401-1dcba79f095c?q=80&w=600&auto=format&fit=crop"
+                    src="/images/durbar_square.avif"
                     alt="Durbar Square"
                     fill
                     className="object-cover"
@@ -469,7 +469,7 @@ export default function FreeWalkingTourPage() {
               <div className="space-y-4 pt-8">
                 <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=600&auto=format&fit=crop"
+                    src="/images/monkey_temple.avif"
                     alt="Swayambhunath"
                     fill
                     className="object-cover"
@@ -479,8 +479,8 @@ export default function FreeWalkingTourPage() {
                 </div>
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=600&auto=format&fit=crop"
-                    alt="Vishnumati River"
+                    src="/images/ktm_street.avif"
+                    alt="Kathmandu Street"
                     fill
                     className="object-cover"
                     sizes="25vw"
@@ -684,134 +684,134 @@ export default function FreeWalkingTourPage() {
       </section>
 
       {/* Tour Route - Mobile Horizontal Scrollable */}
-      <section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46]">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#C4A65C] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
-              <Compass className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The Journey
-            </Badge>
-            <h2 className="text-2xl md:text-4xl font-serif text-white mb-3 md:mb-4">
-              Journey Through Ancient Kathmandu
-            </h2>
-            <p className="text-white/70 text-sm md:text-lg">
-              Follow our curated route through 8 incredible stops
-            </p>
-          </div>
+<section id="route" className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46]">
+  <div className="container mx-auto px-4 md:px-6">
+    <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-[#B3172C]/20 to-[#38425B]/20 text-[#C4A65C] border-[#B3172C]/30 py-1.5 px-3 text-xs md:text-sm font-semibold">
+        <Compass className="w-3 h-3 md:w-4 md:h-4 mr-2" /> The Journey
+      </Badge>
+      <h2 className="text-2xl md:text-4xl font-serif text-white mb-3 md:mb-4">
+        Journey Through Ancient Kathmandu
+      </h2>
+      <p className="text-white/70 text-sm md:text-lg">
+        Follow our curated route through 8 incredible stops
+      </p>
+    </div>
 
-          {/* Mobile Horizontal Scrollable with Arrows */}
-          <div className="md:hidden relative">
-            <div className="relative">
-              <button
-                onClick={() => scrollTourStops('left')}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
-                aria-label="Scroll left"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => scrollTourStops('right')}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
-                aria-label="Scroll right"
-              >
-                <ChevronRightIcon className="w-4 h-4" />
-              </button>
-              
-              <div 
-                ref={tourStopsContainerRef}
-                onTouchStart={preventHorizontalScroll}
-                onTouchMove={preventHorizontalScroll}
-                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
-                style={{ 
-                  scrollbarWidth: 'none', 
-                  msOverflowStyle: 'none',
-                  overscrollBehaviorX: 'contain'
-                }}
-              >
-                {tourStops.map((stop, i) => (
-                  <div 
-                    key={i}
-                    className="tourstop-card w-[300px] flex-shrink-0 snap-start"
-                  >
-                    <div className="relative h-48 rounded-xl overflow-hidden mb-3">
-                      <Image
-                        src={stop.image}
-                        alt={stop.name}
-                        fill
-                        className="object-cover"
-                        sizes="300px"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-sm">
-                          {i + 1}
-                        </div>
-                      </div>
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <Badge className="bg-[#B3172C]/20 text-[#C4A65C] border-none text-xs mb-1">
-                          {stop.type}
-                        </Badge>
-                        <h4 className="text-base font-bold text-white">{stop.name}</h4>
-                      </div>
-                    </div>
-                    <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Scroll indicator dots */}
-            <div className="flex justify-center gap-2 mt-4">
-              {tourStops.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (tourStopsContainerRef.current) {
-                      const cardWidth = tourStopsContainerRef.current.querySelector('.tourstop-card')?.clientWidth || 300;
-                      tourStopsContainerRef.current.scrollTo({
-                        left: i * (cardWidth + 16),
-                        behavior: 'smooth'
-                      });
-                      setCurrentTourStopIndex(i);
-                    }
-                  }}
-                  className={`w-2 h-2 rounded-full ${i === currentTourStopIndex ? 'bg-[#B3172C]' : 'bg-white/50'}`}
-                  aria-label={`Go to stop ${i + 1}`}
+    {/* Mobile Horizontal Scrollable with Arrows */}
+    <div className="md:hidden relative">
+      <div className="relative">
+        <button
+          onClick={() => scrollTourStops('left')}
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => scrollTourStops('right')}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#181D31]"
+          aria-label="Scroll right"
+        >
+          <ChevronRightIcon className="w-4 h-4" />
+        </button>
+        
+        <div 
+          ref={tourStopsContainerRef}
+          onTouchStart={preventHorizontalScroll}
+          onTouchMove={preventHorizontalScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-4 -mx-4 px-4"
+          style={{ 
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none',
+            overscrollBehaviorX: 'contain'
+          }}
+        >
+          {tourStops.map((stop, i) => (
+            <div 
+              key={i}
+              className="tourstop-card w-[300px] flex-shrink-0 snap-start"
+            >
+              <div className="relative h-48 rounded-xl overflow-hidden mb-3">
+                <Image
+                  src={stop.image}
+                  alt={stop.name}
+                  fill
+                  className="object-cover"
+                  sizes="300px"
                 />
-              ))}
-            </div>
-          </div>
-
-          {/* Desktop Grid Layout */}
-          <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tourStops.map((stop, i) => (
-              <div key={i} className="group">
-                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-                  <Image
-                    src={stop.image}
-                    alt={stop.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                      {i + 1}
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white border-none text-xs mb-2">
-                      {stop.type}
-                    </Badge>
-                    <h4 className="text-lg font-bold text-white">{stop.name}</h4>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
+                <div className="absolute top-3 left-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    {i + 1}
                   </div>
                 </div>
-                <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
+                <div className="absolute bottom-3 left-3 right-3">
+                  <Badge className="bg-[#B3172C]/20 text-[#C4A65C] border-none text-xs mb-1">
+                    {stop.type}
+                  </Badge>
+                  <h4 className="text-base font-bold text-white">{stop.name}</h4>
+                </div>
               </div>
-            ))}
-          </div>
+              <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+      
+      {/* Scroll indicator dots */}
+      <div className="flex justify-center gap-2 mt-4">
+        {tourStops.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              if (tourStopsContainerRef.current) {
+                const cardWidth = tourStopsContainerRef.current.querySelector('.tourstop-card')?.clientWidth || 300;
+                tourStopsContainerRef.current.scrollTo({
+                  left: i * (cardWidth + 16),
+                  behavior: 'smooth'
+                });
+                setCurrentTourStopIndex(i);
+              }
+            }}
+            className={`w-2 h-2 rounded-full transition-colors duration-300 ${i === currentTourStopIndex ? 'bg-[#B3172C]' : 'bg-white/50'}`}
+            aria-label={`Go to stop ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+
+    {/* Desktop Grid Layout */}
+    <div className="hidden md:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {tourStops.map((stop, i) => (
+        <div key={i} className="group">
+          <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+            <Image
+              src={stop.image}
+              alt={stop.name}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="25vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#38425B] via-transparent to-transparent" />
+            <div className="absolute top-4 left-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#B3172C] to-[#57192E] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                {i + 1}
+              </div>
+            </div>
+            <div className="absolute bottom-4 left-4 right-4">
+              <Badge className="bg-gradient-to-r from-[#B3172C] to-[#57192E] text-white border-none text-xs mb-2">
+                {stop.type}
+              </Badge>
+              <h4 className="text-lg font-bold text-white">{stop.name}</h4>
+            </div>
+          </div>
+          <p className="text-white/70 text-sm leading-relaxed">{stop.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Special Experiences */}
       <section className="py-12 md:py-24 bg-gradient-to-b from-[#FFFDF9] to-[#38425B]/10">
@@ -874,10 +874,10 @@ export default function FreeWalkingTourPage() {
                   <Star key={i} className="w-4 h-4 md:w-6 md:h-6 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
-              <span className="text-[#57192E] font-bold text-sm md:text-lg">94% Excellent Rating</span>
+              <span className="text-[#57192E] font-bold text-sm md:text-lg">97% Excellent Rating</span>
             </div>
             <p className="text-[#232D46] text-sm md:text-lg">
-              Out of over 350 reviews on TripAdvisor, 94% rate the Free Walking Tour as 'Excellent'
+              Out of more than 500 reviews on TripAdvisor, 97% rate the Free Walking Tour as 'Excellent'
             </p>
           </div>
 
@@ -981,7 +981,7 @@ export default function FreeWalkingTourPage() {
                       "4-5 hours exploring temples, stupas, and shrines",
                       "In-depth cultural insights and history",
                       "Small group experience",
-                      "Personal recommendations for your stay",
+                      "Personal recommendations for your trip",
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-3 text-white/90">
                         <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-[#C4A65C] shrink-0 mt-0.5" />
@@ -1039,7 +1039,7 @@ export default function FreeWalkingTourPage() {
       <section className="py-12 md:py-24 bg-gradient-to-b from-[#181D31] to-[#232D46] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <Image
-            src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?q=80&w=1200&auto=format&fit=crop"
+            src="/images/footer.avif"
             alt="Monkey Temple"
             fill
             className="object-cover"
