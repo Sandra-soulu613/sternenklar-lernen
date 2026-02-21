@@ -145,13 +145,13 @@ const tourStops = [
   {
     name: "Newari Neighbourhood",
     type: "Hidden Gem",
-    image: "/images/harati.avif",
+    image: "/images/kites.avif",
     description: "Sleepy traditional streets where time stands still.",
   },
   {
     name: "Cremation Site",
     type: "Sacred Site",
-    image: "/images/cremation.avif",
+    image: "/images/cremation-1.avif",
     description: "Witness local cremation ghats similar to the Ganges.",
   },
   {
@@ -447,7 +447,7 @@ export default function FreeWalkingTourPage() {
               <div className="space-y-4">
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/buddhist_temple.avif"
+                    src="/images/buddhist_temple-1.avif"
                     alt="Buddhist Stupa"
                     fill
                     className="object-cover"
@@ -457,8 +457,8 @@ export default function FreeWalkingTourPage() {
                 </div>
                 <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/durbar_square.avif"
-                    alt="Durbar Square"
+                    src="/images/teeth.avif"
+                    alt="Teeth Temple"
                     fill
                     className="object-cover"
                     sizes="25vw"
@@ -469,8 +469,8 @@ export default function FreeWalkingTourPage() {
               <div className="space-y-4 pt-8">
                 <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/monkey_temple.avif"
-                    alt="Swayambhunath"
+                    src="/images/ancient_temple.avif"
+                    alt="Ancient Temple"
                     fill
                     className="object-cover"
                     sizes="25vw"
@@ -479,8 +479,8 @@ export default function FreeWalkingTourPage() {
                 </div>
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/ktm_street.avif"
-                    alt="Kathmandu Street"
+                    src="/images/monkey_temple.avif"
+                    alt="The Monkey Temple"
                     fill
                     className="object-cover"
                     sizes="25vw"
