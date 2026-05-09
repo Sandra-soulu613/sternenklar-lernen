@@ -188,41 +188,78 @@ const specialExperiences = [
 
 const testimonials = [
   {
-    name: "Emma Thompson",
-    country: "Australia",
-    text: "Absolutely incredible tour! Our guide's knowledge of local history and culture was remarkable. The hidden alleys and local experiences were something I'd never have found on my own.",
-    rating: 5,
-  },
-  {
-    name: "Marcus Weber",
-    country: "Germany",
-    text: "Best walking tour I've ever taken. The guide had decades of experience and it showed. From the glass bead market to the monkey temple - every stop was fascinating.",
-    rating: 5,
-  },
-  {
-    name: "Priya Sharma",
-    country: "India",
-    text: "Even as someone from the region, I learned so much about Kathmandu's history. The local lassi was delicious and the views from Monkey Temple were breathtaking!",
-    rating: 5,
-  },
-  {
-    name: "David Chen",
-    country: "Singapore",
-    text: "The free walking tour exceeded all expectations. Our guide was incredibly knowledgeable and passionate about sharing Kathmandu's rich culture.",
-    rating: 5,
-  },
-  {
-    name: "Sarah Johnson",
+    name: "Amber Wilkie",
     country: "USA",
-    text: "What an amazing way to experience Kathmandu! The guide's insights into local life and history made this the highlight of our Nepal trip.",
+    text: "I did the 'free' walking tour with Sabinaya, who is a lovely young man and very knowledgeable about Nepali culture. I learned a lot about Nepal and Kathmandu. Highly recommend! Tip well!",
     rating: 5,
   },
   {
-    name: "Kenji Tanaka",
-    country: "Japan",
-    text: "Perfect introduction to Kathmandu. The pacing was excellent, and we saw so many hidden gems we would have missed on our own.",
+    name: "Reece Foxon",
+    country: "UK",
+    text: "A really enjoyable experience! It was the perfect way to learn more about the culture, religion and just the way of life in Nepal! Our guide Sabinaya was amazing, spoke great English and explained everything really well!",
     rating: 5,
   },
+  {
+    name: "Desiree",
+    country: "Singapore",
+    text: "Met Shiva's son Sabinaya and was greeted by his open and friendly energy. A young, sprightly man, full of knowledge and perspective. The walking tour was way more thorough than expected, from Thamel to the Ason Bazaar and ending at the Monkey Temple.",
+    rating: 5,
+  },
+  {
+    name: "Giovanni Conte",
+    country: "Italy",
+    text: "I had a great experience on the Kathmandu walking tour with Sabinaya. The guide was extremely knowledgeable and passionate, providing clear and engaging explanations throughout the tour. The tour was very well organized and covered all the main highlights.",
+    rating: 5,
+  },
+  {
+    name: "Grishma",
+    country: "India",
+    text: "I was traveling solo in Kathmandu and came across this free walking tour hosted by Shiva, and I'm really glad I joined it. The tour is about 4 hours long and covers most of the main tourist spots. Shiva is a very friendly and knowledgeable guide.",
+    rating: 5,
+  },
+  {
+    name: "Carole Munanoa",
+    country: "France",
+    text: "My Kathmandu city tour with Shiva was an unforgettable experience. What truly set this tour apart was the way Shiva explained the coexistence of Hinduism and Buddhism in Kathmandu. He made complex spiritual concepts easy to understand.",
+    rating: 5,
+  },
+  {
+    name: "Pluma Haarstad",
+    country: "USA",
+    text: "The tour was very fun and informative. I learned a lot about Kathmandu as well as the history and culture of Nepal. We visited many beautiful temples and viewpoints. I highly recommend this company!",
+    rating: 5,
+  },
+  {
+    name: "Estelle Lyan",
+    country: "France",
+    text: "Nice walking tour in Kathmandu with Shiva. Very interesting and so knowledgeable, he showed me many places telling me the history. He answered all my questions sharing about religion, culture, politics, and history of his country!",
+    rating: 5,
+  },
+  {
+    name: "Julia Kunzer",
+    country: "Germany",
+    text: "Shiva's son guided us through Kathmandu! He was so friendly, welcoming and open minded! Highly recommend this tour! Was really interesting!",
+    rating: 5,
+  },
+  {
+    name: "Will Winterbourne",
+    country: "UK",
+    text: "I did the walking tour around Kathmandu with Sabinaya who was such an insightful and enjoyable guide, fascinating few hours exploring Kathmandu, would highly recommend!",
+    rating: 5,
+  },
+  {
+    name: "Amber Lowen",
+    country: "UK",
+    text: "Amazing tour! Super informative and interesting, and Shiva is a great guide. He is very knowledgeable and takes you round all the local sites. I would 100% recommend this to anyone visiting Kathmandu.",
+    rating: 5,
+  },
+  {
+    name: "Neda Vadakojytė",
+    country: "Lithuania",
+    text: "Shiva is really passionate about guiding, so it's interesting to listen. He is fluent in English and this is important too. He showed parts of Thamel that most likely you would miss!",
+    rating: 5,
+  },
+
 ];
 
 // Create infinite testimonials for scrolling animation
@@ -312,7 +349,7 @@ export default function FreeWalkingTourPage() {
         </a>
       </div>
 
-      {/* Hero Section - Mobile Optimized */}
+            {/* Hero Section - Mobile Optimized */}
       <section ref={heroRef} className="relative h-[85vh] min-h-[500px] max-h-[700px] md:max-h-[800px] overflow-hidden">
         <div className="absolute inset-0" style={{ background: elegantColors.gradients.darkBlueCharcoal }}>
           <Image
@@ -361,11 +398,20 @@ export default function FreeWalkingTourPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                <Link href="/contact" className="flex-1">
-                  <Button size="lg" className="w-full bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
-                    <Heart className="mr-2 w-4 h-4 md:w-5 md:h-5" /> Book Your Spot
+                {/* UPDATED: Direct WhatsApp link with proper URL */}
+                <a 
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1"
+                >
+                  <Button 
+                    size="lg" 
+                    className="w-full bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform"
+                  >
+                    <Heart className="mr-2 w-4 h-4 md:w-5 md:h-5" /> Book via WhatsApp
                   </Button>
-                </Link>
+                </a>
                 <Button 
                   size="lg" 
                   variant="outline" 
@@ -379,7 +425,6 @@ export default function FreeWalkingTourPage() {
           </div>
         </div>
       </section>
-
       {/* Stats Banner - Mobile Optimized */}
       <section className="relative z-10 px-4">
         <div className="container mx-auto">
@@ -1082,11 +1127,7 @@ export default function FreeWalkingTourPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-8 md:mb-12">
-              <Link href="/contact" className="sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-[#B3172C] to-[#57192E] hover:from-[#9F1327] hover:to-[#471625] text-white font-bold h-12 md:h-14 px-6 md:px-8 rounded-full text-base md:text-lg shadow-lg active:scale-95 transition-transform">
-                  <Heart className="mr-2 w-4 h-4 md:w-5 md:h-5" /> Book Your Tour
-                </Button>
-              </Link>
+              
               <a 
                 href={WHATSAPP_LINK}
                 target="_blank"
