@@ -7,7 +7,6 @@ import {
   Phone,
   Mail,
   Instagram,
-  Linkedin,
   Heart,
   Sparkles,
   Star,
@@ -43,11 +42,10 @@ const colors = {
 
 // Slideshow images
 const slideshowImages = [
-  "/images/soulunaya-1.jpg",
-  "/images/soulunaya-2.jpg",
-  "/images/soulunaya-3.jpg",
-  "/images/soulunaya-4.jpg",
-  "/images/soulunaya-5.jpg",
+  "/images/image-1.webp",
+  "/images/image-2.webp",
+  "/images/image-3.webp",
+
 ];
 
 export default function SoulunayaPage() {
@@ -81,37 +79,75 @@ function PageContent() {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: colors.warmWhite }}>
       <LanguageToggle />
 
-      {/* Hero Section - Solid #793A29 background with centered logo */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: colors.primary }}>
-        <div className="relative z-10 text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <div className="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 mx-auto mb-6 sm:mb-8 relative">
-              <Image
-                src="/images/soulunaya-logo.png"
-                alt="Soulunaya Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            <div className="w-20 sm:w-24 h-0.5 mx-auto bg-white/30"></div>
-          </motion.div>
-        </div>
+   {/* Hero Section - Rich artistic gradient background with more shades */}
+<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  {/* Main multi-stop gradient with richer brown spectrum */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#5A2B1F] via-[#7A3B2A] via-[#8B4633] via-[#9B4E3A] to-[#C17A5B]"></div>
+  
+  {/* Diagonal gradient for depth - dark to light */}
+  <div className="absolute inset-0 bg-gradient-to-tr from-[#3D1C12] via-[#7A3B2A] to-[#D4A07A]/30"></div>
+  
+  {/* Radial burst from center */}
+  <div className="absolute inset-0 bg-radial-gradient from-[#C17A5B]/20 via-[#7A3B2A]/10 to-transparent"></div>
+  
+  {/* Warm overlay for richness */}
+  <div className="absolute inset-0 bg-gradient-to-t from-[#3D1C12]/40 via-[#8B4633]/20 to-[#C17A5B]/20"></div>
+  
+  {/* Cross gradient for more depth */}
+  <div className="absolute inset-0 bg-gradient-to-l from-[#5A2B1F]/50 via-transparent to-[#9B4E3A]/30"></div>
+  
+  {/* Subtle noise texture overlay for artistic feel */}
+  <div className="absolute inset-0 opacity-30 mix-blend-overlay" 
+    style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.3\' /%3E%3C/svg%3E")', backgroundRepeat: 'repeat' }}>
+  </div>
+  
+  {/* Vignette effect */}
+  <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
+  
+  {/* Decorative light particles - artistic touch */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-pulse"></div>
+    <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#D4A07A]/10 blur-3xl animate-pulse delay-700"></div>
+    <div className="absolute top-2/3 left-1/2 w-72 h-72 rounded-full bg-[#C17A5B]/15 blur-3xl animate-pulse delay-1500"></div>
+  </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
-      </section>
+  <div className="relative z-10 text-center px-4">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
+      {/* Much larger logo container */}
+      <div className="w-80 h-80 sm:w-96 sm:h-96 md:w-[30rem] md:h-[30rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem] mx-auto mb-6 sm:mb-8 relative">
+        <Image
+          src="/images/logo-2.png"
+          alt="Soulunaya Logo"
+          fill
+          className="object-contain drop-shadow-2xl"
+          priority
+        />
+      </div>
+      <div className="w-24 sm:w-32 h-0.5 mx-auto bg-white/40"></div>
+    </motion.div>
+  </div>
 
+  {/* Custom scroll indicator - modern and minimalist */}
+  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <motion.div
+      animate={{ y: [0, 8, 0] }}
+      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+      className="cursor-pointer"
+      onClick={() => scrollToSection("welcome")}
+    >
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-white/70 text-xs tracking-wider font-light">SCROLL</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+      </div>
+    </motion.div>
+  </div>
+</section>
       {/* Welcome Section with Vertical Slideshow on Left */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-32">
+      <section id="welcome" className="py-12 sm:py-16 md:py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Left Side - Vertical Slideshow */}
@@ -267,9 +303,7 @@ function PageContent() {
                 <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
                   {t("soundJourney.description")}
                 </p>
-                <Button variant="outline" className="bg-white/20 border-white/40 text-white hover:bg-white/30 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-2.5 h-auto">
-                  {t("learnMore")} <ChevronRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                </Button>
+                
               </div>
             </div>
 
@@ -282,9 +316,7 @@ function PageContent() {
                 <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
                   {t("travel.description")}
                 </p>
-                <Button variant="outline" className="bg-white/20 border-white/40 text-white hover:bg-white/30 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-2.5 h-auto">
-                  {t("travel.button")} <ChevronRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                </Button>
+                
               </div>
             </div>
           </div>
@@ -365,7 +397,7 @@ function PageContent() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="relative h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
             <Image
-              src="/images/banner-image.jpg"
+              src="/images/image-5.webp"
               alt="Soulunaya Banner"
               fill
               className="object-cover"
@@ -436,9 +468,6 @@ function PageContent() {
                   <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style={{ backgroundColor: colors.primary }}>
                     <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </a>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style={{ backgroundColor: colors.primary }}>
-                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                  </a>
                 </div>
                 <div className="mt-3 sm:mt-4">
                   <div className="text-base sm:text-xl font-light text-gray-800">soulunaya</div>
@@ -452,7 +481,7 @@ function PageContent() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-square relative">
                   <Image
-                    src="/images/contact-photo.jpg"
+                    src="/images/image-4.webp"
                     alt="Contact Sandra Andermatt"
                     fill
                     className="object-cover"
@@ -505,7 +534,6 @@ function PageContent() {
                 <p>Phone: Gregor Cresnar, <a href="https://www.flaticon.com/free-icons/phone" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
                 <p>Email: Freepik, <a href="https://www.flaticon.com/free-icons/email" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
                 <p>Instagram: Freepik, <a href="https://www.flaticon.com/free-icons/instagram" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-                <p>LinkedIn: Icons8, <a href="https://icons8.com/icons" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Icons8</a></p>
               </div>
             </div>
 
