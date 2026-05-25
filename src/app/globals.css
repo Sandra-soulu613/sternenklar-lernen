@@ -5,15 +5,14 @@
 
 @layer base {
   :root {
-    /* Base colors */
+    --primary: 121 58% 32%; /* #793A29 */
+    --primary-foreground: 0 0% 100%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
@@ -24,30 +23,8 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 121 58% 32%;
     --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
   }
 }
 
@@ -56,64 +33,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif;
   }
 }
 
 @layer utilities {
-  /* Custom font classes */
   .font-serif {
     font-family: var(--font-playfair), Georgia, serif;
   }
-  
   .font-sans {
     font-family: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
   }
-}
-
-/* Add to your globals.css */
-
-@keyframes infinite-scroll-mobile {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-85vw * 6 - 6rem * 6));
-  }
-}
-
-@keyframes infinite-scroll-desktop {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-400px * 6 - 2rem * 6));
-  }
-}
-
-.animate-infinite-scroll-slow-mobile {
-  animation: infinite-scroll-mobile 90s linear infinite;
-  width: calc(85vw * 12 + 6rem * 12);
-}
-
-.animate-infinite-scroll-slow-desktop {
-  animation: infinite-scroll-desktop 90s linear infinite;
-  width: calc(400px * 12 + 2rem * 12);
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.snap-x {
-  scroll-snap-type: x mandatory;
-}
-
-.snap-start {
-  scroll-snap-align: start;
 }
