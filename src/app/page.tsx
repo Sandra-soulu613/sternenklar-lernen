@@ -57,14 +57,16 @@ export default function SoulunayaPage() {
 }
 
 function PageContent() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const [showLegal, setShowLegal] = React.useState(false);
+  const [legalContent, setLegalContent] = React.useState<React.ReactNode>(null);
 
-  // Auto-rotate slideshow
+  // Auto-rotate slideshow - smoother with longer duration and better timing
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % slideshowImages.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -75,116 +77,203 @@ function PageContent() {
     }
   };
 
+  // Function to generate legal section content dynamically based on current language
+  const generateLegalContent = React.useCallback(() => {
+    return (
+      <section className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3 sm:mb-4">{t("legal.title")}</h2>
+            <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+          </div>
+          <div className="space-y-6 sm:space-y-8">
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.owner")}</h3>
+              <div className="text-sm sm:text-base text-gray-600 space-y-1">
+                <p>Sandra Andermatt</p>
+                <p>Amlehnstrasse 48</p>
+                <p>6010 Kriens</p>
+                <p>+41 79 810 57 72</p>
+                <p className="break-words">sandra.andermatt@psychologie.ch</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.websiteInfo")}</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.websiteInfoText1")}</p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">{t("legal.websiteInfoText2")}</p>
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.liability")}</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.liabilityText")}</p>
+              <div className="text-xs text-gray-500 mt-2 sm:mt-3 space-y-1">
+                <p>Phone: Gregor Cresnar, <a href="https://www.flaticon.com/free-icons/phone" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
+                <p>Email: Freepik, <a href="https://www.flaticon.com/free-icons/email" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
+                <p>Instagram: Freepik, <a href="https://www.flaticon.com/free-icons/instagram" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.copyright")}</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.copyrightText1")}</p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">{t("legal.copyrightText2")}</p>
+            </div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.privacy")}</h3>
+              <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">{t("legal.privacyDate")}</p>
+              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.responsible")}</h4>
+              <p className="text-sm sm:text-base text-gray-600">Sandra Andermatt, Amlehnstrasse 48, 6010 Kriens</p>
+              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.psychotherapy")}</h4>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.psychotherapyText")}</p>
+              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.websitePrivacy")}</h4>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.websitePrivacyText")}</p>
+              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.rights")}</h4>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.rightsText")}</p>
+              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.security")}</h4>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.securityText")}</p>
+              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.changes")}</h4>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.changesText")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }, [t]);
+
+  // Update legal content when language changes and legal section is visible
+  React.useEffect(() => {
+    if (showLegal) {
+      setLegalContent(generateLegalContent());
+    }
+  }, [language, generateLegalContent, showLegal]);
+
+  // Toggle legal section function
+  const toggleLegalSection = () => {
+    if (showLegal) {
+      setShowLegal(false);
+      setLegalContent(null);
+    } else {
+      setLegalContent(generateLegalContent());
+      setShowLegal(true);
+      setTimeout(() => {
+        const impressumElement = document.getElementById("impressum");
+        if (impressumElement) {
+          impressumElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: colors.warmWhite }}>
       <LanguageToggle />
 
-   {/* Hero Section - Rich artistic gradient background with more shades */}
-<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-  {/* Main multi-stop gradient with richer brown spectrum */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#5A2B1F] via-[#7A3B2A] via-[#8B4633] via-[#9B4E3A] to-[#C17A5B]"></div>
-  
-  {/* Diagonal gradient for depth - dark to light */}
-  <div className="absolute inset-0 bg-gradient-to-tr from-[#3D1C12] via-[#7A3B2A] to-[#D4A07A]/30"></div>
-  
-  {/* Radial burst from center */}
-  <div className="absolute inset-0 bg-radial-gradient from-[#C17A5B]/20 via-[#7A3B2A]/10 to-transparent"></div>
-  
-  {/* Warm overlay for richness */}
-  <div className="absolute inset-0 bg-gradient-to-t from-[#3D1C12]/40 via-[#8B4633]/20 to-[#C17A5B]/20"></div>
-  
-  {/* Cross gradient for more depth */}
-  <div className="absolute inset-0 bg-gradient-to-l from-[#5A2B1F]/50 via-transparent to-[#9B4E3A]/30"></div>
-  
-  {/* Subtle noise texture overlay for artistic feel */}
-  <div className="absolute inset-0 opacity-30 mix-blend-overlay" 
-    style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.3\' /%3E%3C/svg%3E")', backgroundRepeat: 'repeat' }}>
-  </div>
-  
-  {/* Vignette effect */}
-  <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
-  
-  {/* Decorative light particles - artistic touch */}
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-pulse"></div>
-    <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#D4A07A]/10 blur-3xl animate-pulse delay-700"></div>
-    <div className="absolute top-2/3 left-1/2 w-72 h-72 rounded-full bg-[#C17A5B]/15 blur-3xl animate-pulse delay-1500"></div>
-  </div>
+      {/* Hero Section - Rich artistic gradient background with more shades */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Main multi-stop gradient with richer brown spectrum */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#5A2B1F] via-[#7A3B2A] via-[#8B4633] via-[#9B4E3A] to-[#C17A5B]"></div>
+        
+        {/* Diagonal gradient for depth - dark to light */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#3D1C12] via-[#7A3B2A] to-[#D4A07A]/30"></div>
+        
+        {/* Radial burst from center */}
+        <div className="absolute inset-0 bg-radial-gradient from-[#C17A5B]/20 via-[#7A3B2A]/10 to-transparent"></div>
+        
+        {/* Warm overlay for richness */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#3D1C12]/40 via-[#8B4633]/20 to-[#C17A5B]/20"></div>
+        
+        {/* Cross gradient for more depth */}
+        <div className="absolute inset-0 bg-gradient-to-l from-[#5A2B1F]/50 via-transparent to-[#9B4E3A]/30"></div>
+        
+        {/* Subtle noise texture overlay for artistic feel */}
+        <div className="absolute inset-0 opacity-30 mix-blend-overlay" 
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.3\' /%3E%3C/svg%3E")', backgroundRepeat: 'repeat' }}>
+        </div>
+        
+        {/* Vignette effect */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
+        
+        {/* Decorative light particles - artistic touch */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#D4A07A]/10 blur-3xl animate-pulse delay-700"></div>
+          <div className="absolute top-2/3 left-1/2 w-72 h-72 rounded-full bg-[#C17A5B]/15 blur-3xl animate-pulse delay-1500"></div>
+        </div>
 
-  <div className="relative z-10 text-center px-4">
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-    >
-      {/* Much larger logo container */}
-      <div className="w-80 h-80 sm:w-96 sm:h-96 md:w-[30rem] md:h-[30rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem] mx-auto mb-6 sm:mb-8 relative">
-        <Image
-          src="/images/logo-2.png"
-          alt="Soulunaya Logo"
-          fill
-          className="object-contain drop-shadow-2xl"
-          priority
-        />
-      </div>
-      <div className="w-24 sm:w-32 h-0.5 mx-auto bg-white/40"></div>
-    </motion.div>
-  </div>
+        <div className="relative z-10 text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            {/* Smaller logo container */}
+            <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-[22rem] md:h-[22rem] lg:w-[26rem] lg:h-[26rem] xl:w-[30rem] xl:h-[30rem] mx-auto mb-6 sm:mb-8 relative">
+              <Image
+                src="/images/logo-2.png"
+                alt="Soulunaya Logo"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
+            <div className="w-24 sm:w-32 h-0.5 mx-auto bg-white/40"></div>
+          </motion.div>
+        </div>
 
-  {/* Custom scroll indicator - modern and minimalist */}
-  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-    <motion.div
-      animate={{ y: [0, 8, 0] }}
-      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-      className="cursor-pointer"
-      onClick={() => scrollToSection("welcome")}
-    >
-      <div className="flex flex-col items-center gap-2">
-        <span className="text-white/70 text-xs tracking-wider font-light">SCROLL</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
-      </div>
-    </motion.div>
-  </div>
-</section>
+        {/* Custom scroll indicator - modern and minimalist */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            className="cursor-pointer"
+            onClick={() => scrollToSection("welcome")}
+          >
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-white/70 text-xs tracking-wider font-light">SCROLL</span>
+              <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Welcome Section with Vertical Slideshow on Left */}
       <section id="welcome" className="py-12 sm:py-16 md:py-20 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-            {/* Left Side - Vertical Slideshow */}
-            <div className="relative h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl order-1 md:order-none">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentImageIndex}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -50 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={slideshowImages[currentImageIndex]}
-                    alt={`Soulunaya slideshow ${currentImageIndex + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </motion.div>
-              </AnimatePresence>
-              
-              {/* Slideshow indicators */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-                {slideshowImages.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImageIndex(idx)}
-                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${
-                      idx === currentImageIndex ? "w-4 sm:w-6 bg-white" : "bg-white/50"
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+{/* Left Side - Vertical Slideshow - CROSSFADE TRANSITION */}
+<div className="relative h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl order-1 md:order-none">
+  {slideshowImages.map((img, idx) => (
+    <motion.div
+      key={idx}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: currentImageIndex === idx ? 1 : 0 }}
+      transition={{ duration: 5, ease: "easeInOut" }}
+      className="absolute inset-0"
+      style={{ pointerEvents: currentImageIndex === idx ? "auto" : "none" }}
+    >
+      <Image
+        src={img}
+        alt={`Soulunaya slideshow ${idx + 1}`}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        priority={idx === 0}
+      />
+    </motion.div>
+  ))}
+  
+  {/* Slideshow indicators */}
+  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+    {slideshowImages.map((_, idx) => (
+      <button
+        key={idx}
+        onClick={() => setCurrentImageIndex(idx)}
+        className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${
+          idx === currentImageIndex ? "w-4 sm:w-6 bg-white" : "bg-white/50"
+        }`}
+        aria-label={`Go to slide ${idx + 1}`}
+      />
+    ))}
+  </div>
+</div>
 
             {/* Right Side - Welcome Text */}
             <div className="order-2 md:order-none">
@@ -211,7 +300,7 @@ function PageContent() {
         </div>
       </section>
 
-      {/* Angebot Section - Therapy, Breath, Silent Walk */}
+      {/* Angebot Section - Therapy, Breath, Silent Walk, SoundJourney, Travel */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
@@ -286,39 +375,48 @@ function PageContent() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
 
-      {/* SoundJourney & Travel Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-32 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {/* SoundJourney */}
-            <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 text-white" style={{ background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)` }}>
-              <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-white/10 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16"></div>
-              <div className="relative z-10">
-                <Music className="w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4 text-white/80" />
-                <h3 className="text-xl sm:text-2xl font-serif mb-2 sm:mb-3">{t("soundJourney.title")}</h3>
-                <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
+            {/* SoundJourney - Now in same Card design */}
+            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group sm:col-span-2 lg:col-span-1">
+              <div className="h-2" style={{ backgroundColor: colors.primary }}></div>
+              <CardContent className="p-5 sm:p-6">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
+                  <Music className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.primary }} />
+                </div>
+                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("soundJourney.title")}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
+                  {t("soundJourney.subtitle")}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   {t("soundJourney.description")}
                 </p>
-                
-              </div>
-            </div>
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
+                  <p className="text-xs sm:text-sm text-gray-500">{t("soundJourney.priceLabel")} <span className="font-semibold" style={{ color: colors.primary }}>{t("soundJourney.price")}</span> / {t("soundJourney.perPerson")}</p>
+                  <p className="text-xs text-gray-400 mt-1">{t("soundJourney.duration")} | {t("soundJourney.registration")}</p>
+                </div>
+              </CardContent>
+            </Card>
 
-            {/* Travel */}
-            <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 text-white" style={{ background: `linear-gradient(135deg, ${colors.sage} 0%, #6B8A5E 100%)` }}>
-              <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-white/10 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16"></div>
-              <div className="relative z-10">
-                <Plane className="w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4 text-white/80" />
-                <h3 className="text-xl sm:text-2xl font-serif mb-2 sm:mb-3">{t("travel.title")}</h3>
-                <p className="text-sm sm:text-base text-white/80 mb-3 sm:mb-4">
+            {/* Soulunaya Travel - Now in same Card design */}
+            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group sm:col-span-2 lg:col-span-1">
+              <div className="h-2" style={{ backgroundColor: colors.sage }}></div>
+              <CardContent className="p-5 sm:p-6">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.sage}20` }}>
+                  <Plane className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.sage }} />
+                </div>
+                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("travel.title")}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
+                  {t("travel.subtitle")}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   {t("travel.description")}
                 </p>
-                
-              </div>
-            </div>
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
+                  <p className="text-xs sm:text-sm text-gray-500">{t("travel.info")}</p>
+                  <p className="text-xs text-gray-400 mt-1">{t("travel.nextDestination")}</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -495,89 +593,10 @@ function PageContent() {
         </div>
       </section>
 
-      {/* Impressum & Datenschutz Section */}
-      <section id="impressum" className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
-        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3 sm:mb-4">{t("legal.title")}</h2>
-            <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
-          </div>
-
-          <div className="space-y-6 sm:space-y-8">
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.owner")}</h3>
-              <div className="text-sm sm:text-base text-gray-600 space-y-1">
-                <p>Sandra Andermatt</p>
-                <p>Amlehnstrasse 48</p>
-                <p>6010 Kriens</p>
-                <p>+41 79 810 57 72</p>
-                <p className="break-words">sandra.andermatt@psychologie.ch</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.websiteInfo")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.websiteInfoText1")}
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">
-                {t("legal.websiteInfoText2")}
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.liability")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.liabilityText")}
-              </p>
-              <div className="text-xs text-gray-500 mt-2 sm:mt-3 space-y-1">
-                <p>Phone: Gregor Cresnar, <a href="https://www.flaticon.com/free-icons/phone" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-                <p>Email: Freepik, <a href="https://www.flaticon.com/free-icons/email" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-                <p>Instagram: Freepik, <a href="https://www.flaticon.com/free-icons/instagram" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.copyright")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.copyrightText1")}</p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">{t("legal.copyrightText2")}</p>
-            </div>
-
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.privacy")}</h3>
-              <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">{t("legal.privacyDate")}</p>
-              
-              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.responsible")}</h4>
-              <p className="text-sm sm:text-base text-gray-600">Sandra Andermatt, Amlehnstrasse 48, 6010 Kriens</p>
-
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.psychotherapy")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.psychotherapyText")}
-              </p>
-
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.websitePrivacy")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.websitePrivacyText")}
-              </p>
-
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.rights")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.rightsText")}
-              </p>
-
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.security")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.securityText")}
-              </p>
-
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.changes")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {t("legal.changesText")}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Impressum & Datenschutz Section - Dynamically shown/hidden */}
+      <div id="impressum">
+        {showLegal && legalContent}
+      </div>
 
       {/* Footer */}
       <footer style={{ backgroundColor: colors.primaryDark }}>
@@ -590,7 +609,7 @@ function PageContent() {
 
             <div className="flex justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
               <button onClick={() => scrollToSection("kontakt")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{t("contact.title")}</button>
-              <button onClick={() => scrollToSection("impressum")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{t("legal.title")}</button>
+              <button onClick={toggleLegalSection} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{t("legal.title")}</button>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-4 sm:mb-6">

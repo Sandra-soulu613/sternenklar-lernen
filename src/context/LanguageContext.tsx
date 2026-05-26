@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 type Language = "de" | "en";
 
@@ -60,10 +60,19 @@ export const translations: Translations = {
   
   // ==================== SOUND JOURNEY & TRAVEL ====================
   "soundJourney.title": { de: "SouLunAya SoundJourney", en: "SouLunAya SoundJourney" },
+  "soundJourney.subtitle": { de: "Gruppen Sound Journey mit Klangschalen", en: "Group Sound Journey with singing bowls" },
   "soundJourney.description": { de: "Tauche ein in die heilende Welt der Klänge. Mit Singing Bowls, Klangschalen und meditativen Klängen.", en: "Immerse yourself in the healing world of sounds. With singing bowls, sound bowls and meditative sounds." },
+  "soundJourney.priceLabel": { de: "Preis", en: "Price" },
+  "soundJourney.price": { de: "CHF 40.-", en: "CHF 40.-" },
+  "soundJourney.perPerson": { de: "pro Person", en: "per person" },
+  "soundJourney.duration": { de: "ca. 60 Minuten", en: "approx. 60 minutes" },
+  "soundJourney.registration": { de: "Anmeldung erforderlich", en: "Registration required" },
   
   "travel.title": { de: "SouLunAya Travel", en: "SouLunAya Travel" },
+  "travel.subtitle": { de: "Transformative Reisen", en: "Transformative Journeys" },
   "travel.description": { de: "Nepal Reisen – begleitet oder online. Eine Reise zu dir selbst, im Herzen des Himalaya.", en: "Nepal Travel - accompanied or online. A journey to yourself, in the heart of the Himalayas." },
+  "travel.info": { de: "Individuelle Angebote auf Anfrage", en: "Individual offers upon request" },
+  "travel.nextDestination": { de: "Nächstes Ziel: Marokko - November 2026", en: "Next destination: Morocco - November 2026" },
   "travel.button": { de: "Daten & Preise", en: "Dates & Prices" },
   "travel.text": { de: "Nepal ist für mich weit mehr als ein Land – es ist ein Kraftort, der mein Herz geprägt hat. Mit SouLunAya lade ich dich ein, diesen Zauber selbst zu erleben: eine Reise nach Nepal – und zugleich eine Reise zu dir selbst. Du entscheidest, wie du reisen möchtest: Begleitet vor Ort (Ich reise mit dir nach Nepal und begleite dich persönlich durch diese besondere Zeit) oder Online begleitet (Du reist selbstständig - und wirst von mir vor, während und nach deiner Reise online begleitet). Ob alleine, als Paar oder in einer kleinen Gruppe: Jede Reise wird individuell nach deinen Bedürfnissen gestaltet. Von der Vorbereitung bis zur Rückkehr bin ich an deiner Seite - für Orientierung, Sicherheit und Vertrauen.", en: "Nepal is much more than a country for me - it is a place of power that has shaped my heart. With SouLunAya I invite you to experience this magic yourself: a journey to Nepal - and at the same time a journey to yourself. You decide how you want to travel: Accompanied on site (I travel with you to Nepal and accompany you personally through this special time) or Online accompanied (you travel independently - and will be accompanied by me online before, during and after your trip). Whether alone, as a couple or in a small group: Every trip is designed individually according to your needs. From preparation to return, I am at your side - for orientation, security and trust." },
   
