@@ -207,7 +207,7 @@ function PageContent() {
             {/* Smaller logo container */}
             <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-[22rem] md:h-[22rem] lg:w-[26rem] lg:h-[26rem] xl:w-[30rem] xl:h-[30rem] mx-auto mb-6 sm:mb-8 relative">
               <Image
-                src="/images/logo-2.png"
+                src="/images/logo-3.png"
                 alt="Soulunaya Logo"
                 fill
                 className="object-contain drop-shadow-2xl"
