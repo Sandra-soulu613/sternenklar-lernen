@@ -17,9 +17,6 @@ import {
   BookOpen,
   Lightbulb,
   TrendingUp,
-  User,
-  Clock,
-  DollarSign,
   AlertCircle,
   Menu,
   X,
@@ -377,13 +374,13 @@ function PageContent() {
     </Card>
   );
 
-  // Team member - Portrait fully visible (using contain instead of cover)
+  // Team member - Portrait fully visible with object-contain
   const TeamMember = ({ name, title, bio, region, phone, email, photoPath }: any) => (
     <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
       <div className="h-1.5" style={{ backgroundColor: colors.accent }}></div>
-      {/* Photo Banner - full portrait visible with object-contain and white background */}
-      <div className="relative w-full bg-white flex items-center justify-center p-4" style={{ minHeight: "280px" }}>
-        <div className="relative w-full h-64">
+      {/* Photo Banner - full portrait visible with object-contain */}
+      <div className="relative w-full bg-[#F5F3F0] flex items-center justify-center p-6" style={{ minHeight: "320px" }}>
+        <div className="relative w-full h-72">
           <Image 
             src={photoPath} 
             alt={name} 
@@ -419,106 +416,135 @@ function PageContent() {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: colors.warmWhite }}>
-      {/* Header with transparent background */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      {/* Header - Enhanced Mobile Experience */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Logo - Extra Large */}
-            <button onClick={scrollToTop} className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
-              <div className="relative w-14 h-14 md:w-20 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
+            {/* Logo - Responsive sizing */}
+            <button onClick={scrollToTop} className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-28 lg:h-28">
                 <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain" />
               </div>
-             
             </button>
 
-            <nav className="hidden md:flex items-center gap-8">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {navItems.map((item) => (
-                <button key={item.id} onClick={item.onClick} className="text-sm text-white hover:text-[#60C2D0] transition-colors drop-shadow-md">
+                <button key={item.id} onClick={item.onClick} className="text-sm text-gray-600 hover:text-[#4A7B6B] transition-colors">
                   {getText(item.label)}
                 </button>
               ))}
             </nav>
 
+            {/* Language Toggle - Desktop */}
             <div className="hidden md:block">
               <LanguageToggle />
             </div>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm">
-              {mobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
-          {mobileMenuOpen && (
-            <div className="md:hidden py-4 bg-white/95 backdrop-blur-sm rounded-lg mt-2">
-              <div className="flex flex-col gap-3 px-4">
-                {navItems.map((item) => (
-                  <button key={item.id} onClick={item.onClick} className="text-sm text-gray-600 hover:text-[#4A7B6B] transition-colors py-2 text-left">
-                    {getText(item.label)}
-                  </button>
-                ))}
-                <div className="pt-2 border-t border-gray-100">
-                  <LanguageToggle />
-                </div>
+          {/* Mobile Menu - Smooth dropdown with touch-friendly spacing */}
+          <motion.div 
+            initial={false}
+            animate={{ height: mobileMenuOpen ? "auto" : 0, opacity: mobileMenuOpen ? 1 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden"
+          >
+            <div className="py-4 border-t border-gray-100 space-y-3">
+              {navItems.map((item) => (
+                <button 
+                  key={item.id} 
+                  onClick={item.onClick} 
+                  className="block w-full text-left text-base text-gray-600 hover:text-[#4A7B6B] transition-colors py-2 px-2 rounded-lg hover:bg-gray-50"
+                >
+                  {getText(item.label)}
+                </button>
+              ))}
+              <div className="pt-3 border-t border-gray-100">
+                <LanguageToggle />
               </div>
             </div>
-          )}
+          </motion.div>
         </div>
       </header>
 
-      {/* Hero Section - Extra Large Logo */}
+      {/* Hero Section - Responsive spacing and typography */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <div className="absolute inset-0 bg-gradient-to-br from-[#2E5B4B] via-[#4A7B6B] to-[#6B9B8B]"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-            {/* Hero Logo - Extra Extra Large */}
-            <div className="flex justify-center mb-8">
-              <div className="relative w-48 h-48 md:w-64 md:h-64">
-                <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain brightness-0 invert" />
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto -mt-10 md:-mt-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Hero Logo - Responsive sizing from mobile to desktop */}
+            <div className="flex justify-center mb-6 md:mb-10">
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain brightness-0 invert" priority />
               </div>
             </div>
             
-            <div className="w-20 h-0.5 bg-white/40 mx-auto mb-6"></div>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+            <div className="w-16 md:w-20 h-0.5 bg-white/40 mx-auto mb-6 md:mb-8"></div>
+            
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-6 md:mb-8 px-2">
               {getText("home.subtitle")}
             </p>
-            <div className="mt-8 flex flex-col items-center gap-2 text-white/80 text-sm">
+            
+            <div className="flex flex-col items-center gap-1.5 md:gap-2 text-white/80 text-xs sm:text-sm md:text-base mb-6 md:mb-8">
               <p>✓ {getText("home.point1")}</p>
               <p>✓ {getText("home.point2")}</p>
               <p>✓ {getText("home.point3")}</p>
               <p>✓ {getText("home.point4")}</p>
               <p>✓ {getText("home.point5")}</p>
             </div>
-            <div className="mt-10">
-              <Badge className="bg-white/20 text-white border-none px-4 py-2">{getText("home.current")}</Badge>
-              <p className="text-white/90 mt-2 italic">{getText("home.currentTitle")}</p>
+            
+            <div>
+              <Badge className="bg-white/20 text-white border-none px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm">
+                {getText("home.current")}
+              </Badge>
+              <p className="text-white/90 mt-2 italic text-sm md:text-base">{getText("home.currentTitle")}</p>
             </div>
           </motion.div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }} className="cursor-pointer" onClick={() => scrollToSection("angebote")}>
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-white/70 text-xs tracking-wider font-light">SCROLL</span>
-              <div className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent"></div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <motion.div 
+            animate={{ y: [0, 8, 0] }} 
+            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }} 
+            className="cursor-pointer" 
+            onClick={() => scrollToSection("angebote")}
+          >
+            <div className="flex flex-col items-center gap-1 md:gap-2">
+              <span className="text-white/70 text-[10px] md:text-xs tracking-wider font-light">SCROLL</span>
+              <div className="w-px h-6 md:h-8 bg-gradient-to-b from-white/50 to-transparent"></div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Angebot Section */}
+      {/* Angebot Section - Mobile optimized spacing */}
       <section id="angebote" className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: colors.lightGray }}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
+            <Badge className="mb-2 md:mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
               <Star className="w-3 h-3 mr-1" /> {getText("offerings.badge")}
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("offerings.title")}</h2>
-            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-2 md:mb-3">{getText("offerings.title")}</h2>
+            <div className="w-12 md:w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <OfferingCard 
               icon={BookOpen}
               title={getText("offerings.lerncoaching.title")}
@@ -592,50 +618,50 @@ function PageContent() {
             />
           </div>
           
-          {/* Workshop Dates Section */}
-          <div className="mt-10 p-4 sm:p-6 rounded-xl" style={{ backgroundColor: `${colors.primary}10` }}>
-            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+          {/* Workshop Dates Section - Mobile optimized */}
+          <div className="mt-8 md:mt-10 p-4 sm:p-6 rounded-xl" style={{ backgroundColor: `${colors.primary}10` }}>
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm sm:text-base">
               <Calendar className="w-4 h-4" style={{ color: colors.primary }} />
               {getText("offerings.workshops.dates_title")}
             </h4>
-            <div className="space-y-2 text-sm text-gray-600">
+            <div className="space-y-2 text-xs sm:text-sm text-gray-600">
               <p>• {getText("offerings.workshops.date1")}</p>
-              <p className="text-xs pl-4">{getText("offerings.workshops.date1_email")}</p>
+              <p className="text-[11px] sm:text-xs pl-3 sm:pl-4 break-words">{getText("offerings.workshops.date1_email")}</p>
               <p>• {getText("offerings.workshops.date2")}</p>
-              <p className="text-xs pl-4">{getText("offerings.workshops.date2_email")}</p>
-              <p className="text-xs italic mt-2">{getText("offerings.workshops.note")}</p>
+              <p className="text-[11px] sm:text-xs pl-3 sm:pl-4 break-words">{getText("offerings.workshops.date2_email")}</p>
+              <p className="text-[11px] sm:text-xs italic mt-2">{getText("offerings.workshops.note")}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section - Group Photo 9:16, Team Photos with full portrait visibility */}
+      {/* About Section - Mobile optimized */}
       <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
+            <Badge className="mb-2 md:mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
               <Award className="w-3 h-3 mr-1" /> {getText("about.badge")}
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("about.title")}</h2>
-            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-2 md:mb-3">{getText("about.title")}</h2>
+            <div className="w-12 md:w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
           </div>
 
-          {/* Group Photo - 9:16 aspect ratio (portrait) */}
-          <div className="mb-16 max-w-sm mx-auto">
+          {/* Group Photo - Mobile optimized with proper aspect ratio */}
+          <div className="mb-12 md:mb-16 max-w-xs sm:max-w-sm mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <div className="aspect-[9/16] relative bg-gray-100">
                 <Image src="/images/team.webp" alt={getText("about.teamPhoto")} fill className="object-cover" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end">
-                <p className="text-white text-sm sm:text-base p-4 bg-gradient-to-r from-black/50 to-transparent w-full">
+                <p className="text-white text-xs sm:text-sm p-3 sm:p-4 bg-gradient-to-r from-black/50 to-transparent w-full">
                   {getText("about.teamPhoto")}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Team Members - Full portrait visible with object-contain */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Team Members - Responsive grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <TeamMember 
               name={getText("about.sandra.name")}
               title={getText("about.sandra.title")}
@@ -685,117 +711,114 @@ function PageContent() {
             />
           </div>
 
-          <div className="mt-12 text-center">
-            <Badge className="bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
+          <div className="mt-10 md:mt-12 text-center">
+            <Badge className="bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
               {getText("about.current")}
             </Badge>
-            <p className="text-gray-700 mt-2 italic">{getText("about.currentTitle")}</p>
+            <p className="text-gray-700 mt-2 italic text-sm sm:text-base">{getText("about.currentTitle")}</p>
           </div>
         </div>
       </section>
 
-      {/* Conditions Section */}
+      {/* Conditions Section - Mobile optimized */}
       <section id="conditions" className="py-12 sm:py-16 md:py-20" style={{ backgroundColor: colors.lightGray }}>
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
-          <div className="text-center mb-8">
-            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
-              <DollarSign className="w-3 h-3 mr-1" /> {getText("conditions.badge")}
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl font-serif text-gray-800 mb-3">{getText("conditions.title")}</h2>
-            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
-            <p className="text-gray-600 mt-2 text-sm">{getText("conditions.intro")}</p>
+          <div className="text-center mb-6 md:mb-8">
+            
+            <h2 className="text-2xl sm:text-3xl font-serif text-gray-800 mb-2 md:mb-3">{getText("conditions.title")}</h2>
+            <div className="w-12 md:w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <p className="text-gray-600 mt-2 text-xs sm:text-sm">{getText("conditions.intro")}</p>
           </div>
           
           <Card className="border-0 shadow-md">
-            <CardContent className="p-6 space-y-4">
-              <div className="flex justify-between items-center border-b pb-2">
-                <span className="text-gray-700">{getText("conditions.rate1")}</span>
-                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate1Price")}</span>
+            <CardContent className="p-5 sm:p-6 space-y-4">
+              <div className="flex justify-between items-center border-b pb-2 flex-wrap gap-2">
+                <span className="text-gray-700 text-sm sm:text-base">{getText("conditions.rate1")}</span>
+                <span className="font-semibold text-sm sm:text-base" style={{ color: colors.primary }}>{getText("conditions.rate1Price")}</span>
               </div>
-              <div className="flex justify-between items-center border-b pb-2">
-                <span className="text-gray-700">{getText("conditions.rate2")}</span>
-                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate2Price")}</span>
+              <div className="flex justify-between items-center border-b pb-2 flex-wrap gap-2">
+                <span className="text-gray-700 text-sm sm:text-base">{getText("conditions.rate2")}</span>
+                <span className="font-semibold text-sm sm:text-base" style={{ color: colors.primary }}>{getText("conditions.rate2Price")}</span>
               </div>
-              <div className="flex justify-between items-center border-b pb-2">
-                <span className="text-gray-700">{getText("conditions.rate3")}</span>
-                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate3Price")}</span>
+              <div className="flex justify-between items-center border-b pb-2 flex-wrap gap-2">
+                <span className="text-gray-700 text-sm sm:text-base">{getText("conditions.rate3")}</span>
+                <span className="font-semibold text-sm sm:text-base" style={{ color: colors.primary }}>{getText("conditions.rate3Price")}</span>
               </div>
-              <div className="pt-3 text-sm text-gray-600 space-y-2">
+              <div className="pt-3 text-xs sm:text-sm text-gray-600 space-y-2">
                 <p className="flex items-start gap-2"><AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.included")}</p>
                 <p className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.travel")}</p>
-                <p className="flex items-start gap-2"><Clock className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.cancellation")}</p>
               </div>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Contact Section - Circular photos */}
+      {/* Contact Section - Mobile optimized with improved touch targets */}
       <section id="kontakt" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
+            <Badge className="mb-2 md:mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
               <Heart className="w-3 h-3 mr-1" /> {getText("contact.badge")}
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("contact.title")}</h2>
-            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
-            <p className="text-gray-600 mt-4">{getText("contact.subtitle")}</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-2 md:mb-3">{getText("contact.title")}</h2>
+            <div className="w-12 md:w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <p className="text-gray-600 mt-3 md:mt-4 text-sm sm:text-base px-2">{getText("contact.subtitle")}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Sandra Andermatt - Circular photo */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Sandra Andermatt */}
             <Card className="border-0 shadow-md h-full">
-              <CardContent className="p-6 text-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+              <CardContent className="p-5 sm:p-6 text-center">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mx-auto mb-3 sm:mb-4 bg-gray-200 relative">
                   <Image src="/images/sandra.webp" alt="Sandra Andermatt" fill className="object-cover" />
                 </div>
-                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.sandra.name")}</h3>
-                <p className="text-xs text-red-500 mb-1">{getText("contact.sandra.note")}</p>
-                <p className="text-xs text-gray-500 mb-3">{getText("contact.sandra.region")}</p>
-                <div className="space-y-2 text-sm">
-                  <a href="tel:+41798105772" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
-                    <Phone className="w-4 h-4" /> +41 79 810 57 72
+                <h3 className="font-serif font-semibold text-gray-800 text-base sm:text-lg mb-1">{getText("contact.sandra.name")}</h3>
+                <p className="text-[11px] sm:text-xs text-red-500 mb-1">{getText("contact.sandra.note")}</p>
+                <p className="text-[11px] sm:text-xs text-gray-500 mb-3 sm:mb-4">{getText("contact.sandra.region")}</p>
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <a href="tel:+41798105772" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors py-1">
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> +41 79 810 57 72
                   </a>
-                  <a href="mailto:sa@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
-                    <Mail className="w-4 h-4" /> sa@sternenklar-lernen.ch
+                  <a href="mailto:sa@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all py-1 text-xs sm:text-sm">
+                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" /> sa@sternenklar-lernen.ch
                   </a>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Nadezhda De Salvador - Circular photo */}
+            {/* Nadezhda De Salvador */}
             <Card className="border-0 shadow-md h-full">
-              <CardContent className="p-6 text-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+              <CardContent className="p-5 sm:p-6 text-center">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mx-auto mb-3 sm:mb-4 bg-gray-200 relative">
                   <Image src="/images/nadezha.webp" alt="Nadezhda De Salvador" fill className="object-cover" />
                 </div>
-                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.nadezhda.name")}</h3>
-                <p className="text-xs text-gray-500 mb-3">{getText("contact.nadezhda.region")}</p>
-                <div className="space-y-2 text-sm">
-                  <a href="tel:+41797613142" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
-                    <Phone className="w-4 h-4" /> +41 79 761 31 42
+                <h3 className="font-serif font-semibold text-gray-800 text-base sm:text-lg mb-1">{getText("contact.nadezhda.name")}</h3>
+                <p className="text-[11px] sm:text-xs text-gray-500 mb-3 sm:mb-4">{getText("contact.nadezhda.region")}</p>
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <a href="tel:+41797613142" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors py-1">
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> +41 79 761 31 42
                   </a>
-                  <a href="mailto:nds@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
-                    <Mail className="w-4 h-4" /> nds@sternenklar-lernen.ch
+                  <a href="mailto:nds@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all py-1 text-xs sm:text-sm">
+                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" /> nds@sternenklar-lernen.ch
                   </a>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Natascha Zoller - Circular photo */}
+            {/* Natascha Zoller */}
             <Card className="border-0 shadow-md h-full">
-              <CardContent className="p-6 text-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+              <CardContent className="p-5 sm:p-6 text-center">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mx-auto mb-3 sm:mb-4 bg-gray-200 relative">
                   <Image src="/images/natascha.webp" alt="Natascha Zoller" fill className="object-cover" />
                 </div>
-                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.natascha.name")}</h3>
-                <p className="text-xs text-gray-500 mb-3">{getText("contact.natascha.region")}</p>
-                <div className="space-y-2 text-sm">
-                  <a href="tel:+41792727024" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
-                    <Phone className="w-4 h-4" /> +41 79 272 70 24
+                <h3 className="font-serif font-semibold text-gray-800 text-base sm:text-lg mb-1">{getText("contact.natascha.name")}</h3>
+                <p className="text-[11px] sm:text-xs text-gray-500 mb-3 sm:mb-4">{getText("contact.natascha.region")}</p>
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <a href="tel:+41792727024" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors py-1">
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> +41 79 272 70 24
                   </a>
-                  <a href="mailto:nz@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
-                    <Mail className="w-4 h-4" /> nz@sternenklar-lernen.ch
+                  <a href="mailto:nz@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all py-1 text-xs sm:text-sm">
+                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" /> nz@sternenklar-lernen.ch
                   </a>
                 </div>
               </CardContent>
@@ -804,34 +827,34 @@ function PageContent() {
         </div>
       </section>
 
-      {/* Legal Section */}
+      {/* Legal Section - Mobile optimized */}
       {showLegal && (
         <section id="impressum" className="py-12 sm:py-16 md:py-20" style={{ backgroundColor: colors.lightGray }}>
           <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-            <div className="text-center mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3 sm:mb-4">{getText("legal.title")}</h2>
-              <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <div className="text-center mb-6 sm:mb-8 md:mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-gray-800 mb-2 sm:mb-3 md:mb-4">{getText("legal.title")}</h2>
+              <div className="w-12 sm:w-16 md:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
             </div>
-            <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-5 sm:space-y-6 md:space-y-8">
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Angaben gemäss Art. 13 DSG</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Angaben gemäss Art. 13 DSG</h3>
                 <p className="text-sm sm:text-base text-gray-600">sternenklar lernen</p>
                 <p className="text-sm sm:text-base text-gray-600 mt-1">Vertreten durch: Sandra Andermatt, Nadezhda De Salvador, Natascha Zoller</p>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Kontaktinformationen</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Kontaktinformationen</h3>
                 <div className="text-sm sm:text-base text-gray-600 space-y-1">
-                  <p>Sandra Andermatt: +41 79 810 57 72, sa@sternenklar-lernen.ch</p>
-                  <p>Nadezhda De Salvador: +41 79 761 31 42, nds@sternenklar-lernen.ch</p>
-                  <p>Natascha Zoller: +41 79 272 70 24, nz@sternenklar-lernen.ch</p>
+                  <p className="break-words">Sandra Andermatt: +41 79 810 57 72, sa@sternenklar-lernen.ch</p>
+                  <p className="break-words">Nadezhda De Salvador: +41 79 761 31 42, nds@sternenklar-lernen.ch</p>
+                  <p className="break-words">Natascha Zoller: +41 79 272 70 24, nz@sternenklar-lernen.ch</p>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Haftungsausschluss</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Haftungsausschluss</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Die Inhalte dieser Website wurden mit grösstmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Urheberrecht</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Urheberrecht</h3>
                 <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Die erstellten Inhalte unterliegen dem schweizerischen Urheberrecht.</p>
               </div>
             </div>
@@ -839,21 +862,21 @@ function PageContent() {
         </section>
       )}
 
-      {/* Footer - Extra Large Logo */}
+      {/* Footer - Mobile optimized with responsive logo */}
       <footer style={{ backgroundColor: colors.primaryDark }}>
         <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="text-center">
-            <div className="flex justify-center mb-4">
-              <div className="relative w-20 h-20">
+            <div className="flex justify-center mb-4 md:mb-6">
+              <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40">
                 <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain brightness-0 invert" />
               </div>
             </div>
-            <div className="mb-4">
-              <h3 className="text-xl sm:text-2xl font-serif text-white mb-1">sternenklar lernen</h3>
-              <p className="text-white/60 text-xs sm:text-sm">Sandra Andermatt, Nadezhda De Salvador, Natascha Zoller</p>
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-white mb-1">sternenklar lernen</h3>
+              <p className="text-white/60 text-[11px] sm:text-xs md:text-sm">Sandra Andermatt, Nadezhda De Salvador, Natascha Zoller</p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-4">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 mb-4 md:mb-6">
               <button onClick={scrollToTop} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.home")}</button>
               <button onClick={() => scrollToSection("angebote")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.offerings")}</button>
               <button onClick={() => scrollToSection("about")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.about")}</button>
@@ -863,7 +886,7 @@ function PageContent() {
             </div>
 
             <div className="border-t border-white/10 pt-4">
-              <p className="text-white/40 text-xs sm:text-sm">{getText("footer.copyright")}</p>
+              <p className="text-white/40 text-[10px] sm:text-xs md:text-sm">{getText("footer.copyright")}</p>
             </div>
           </div>
         </div>
