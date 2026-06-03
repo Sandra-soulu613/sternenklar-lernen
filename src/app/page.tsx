@@ -441,14 +441,17 @@ function PageContent() {
               <LanguageToggle />
             </div>
 
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              aria-label="Menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* Mobile Actions: Language Toggle + Menu Button */}
+            <div className="flex items-center gap-2 md:hidden">
+              <LanguageToggle />
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="Menu"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu - Smooth dropdown with touch-friendly spacing */}
@@ -468,9 +471,6 @@ function PageContent() {
                   {getText(item.label)}
                 </button>
               ))}
-              <div className="pt-3 border-t border-gray-100">
-                <LanguageToggle />
-              </div>
             </div>
           </motion.div>
         </div>
@@ -508,12 +508,6 @@ function PageContent() {
               <p>✓ {getText("home.point5")}</p>
             </div>
             
-            <div>
-              <Badge className="bg-white/20 text-white border-none px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm">
-                {getText("home.current")}
-              </Badge>
-              <p className="text-white/90 mt-2 italic text-sm md:text-base">{getText("home.currentTitle")}</p>
-            </div>
           </motion.div>
         </div>
 
