@@ -1,25 +1,36 @@
+// components/LanguageToggle.tsx
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function LanguageToggle() {
-  const { language, setLanguage, t } = useLanguage();
-
-  const toggleLanguage = () => {
-    setLanguage(language === "de" ? "en" : "de");
-  };
+  const { language, setLanguage } = useLanguage();
 
   return (
-    <button
-      onClick={toggleLanguage}
-      className="fixed top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-[#793A29] text-white rounded-full shadow-lg hover:bg-[#5a2b1f] transition-all duration-300"
-      aria-label={language === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
-    >
-      <Globe className="w-4 h-4" />
-      <span className="text-sm font-medium">
-        {language === "de" ? "English" : "Deutsch"}
-      </span>
-    </button>
+    <div className="flex gap-1 bg-white/90 backdrop-blur-sm rounded-full shadow-sm p-1">
+      <motion.button
+        onClick={() => setLanguage("de")}
+        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+          language === "de"
+            ? "bg-[#4A7B6B] text-white shadow-sm"
+            : "text-gray-600 hover:bg-gray-100"
+        }`}
+        whileTap={{ scale: 0.95 }}
+      >
+        DE
+      </motion.button>
+      <motion.button
+        onClick={() => setLanguage("en")}
+        className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+          language === "en"
+            ? "bg-[#4A7B6B] text-white shadow-sm"
+            : "text-gray-600 hover:bg-gray-100"
+        }`}
+        whileTap={{ scale: 0.95 }}
+      >
+        EN
+      </motion.button>
+    </div>
   );
 }

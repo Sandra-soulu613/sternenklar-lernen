@@ -1,26 +1,30 @@
+// app/page.tsx
 "use client";
 
 import * as React from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Phone,
   Mail,
-  Instagram,
   Heart,
-  Sparkles,
   Star,
   MapPin,
   ChevronRight,
-  Wind,
-  Music,
-  Plane,
-  Leaf,
   Award,
   Briefcase,
-  GraduationCap,
+  Users,
+  BookOpen,
+  Lightbulb,
+  TrendingUp,
+  User,
+  Clock,
+  DollarSign,
+  AlertCircle,
+  Menu,
+  X,
+  Calendar,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage, LanguageProvider } from "@/context/LanguageContext";
@@ -28,27 +32,274 @@ import LanguageToggle from "@/components/LanguageToggle";
 
 // Color palette
 const colors = {
-  primary: "#793A29",
-  primaryLight: "#9B4E3A",
-  primaryDark: "#5A2B1F",
-  warmWhite: "#FFFDF9",
-  lightGray: "#F8F6F4",
+  primary: "#4A7B6B",
+  primaryLight: "#6B9B8B",
+  primaryDark: "#2E5B4B",
+  warmWhite: "#FDFBF7",
+  lightGray: "#F5F3F0",
   mediumGray: "#6B7280",
   darkGray: "#1F2937",
-  gold: "#C4A65C",
-  sage: "#9CAF88",
-  clay: "#C17A5B",
+  gold: "#D4A857",
+  accent: "#C27A5E",
 };
 
-// Slideshow images
-const slideshowImages = [
-  "/images/image-1.webp",
-  "/images/image-2.webp",
-  "/images/image-3.webp",
+// Complete translations with ALL information
+const translations = {
+  de: {
+    "nav.home": "Start",
+    "nav.offerings": "Angebote",
+    "nav.about": "Über uns",
+    "nav.conditions": "Konditionen",
+    "nav.contact": "Kontakt",
 
-];
+    "home.badge": "Willkommen",
+    "home.title": "Lerncoaching & Psychotherapie",
+    "home.subtitle": "In einer entspannten und kreativen Atmosphäre begleiten wir professionell bei der Suche nach Lösungen und dem Erleben neuer Erfahrungen.",
+    "home.point1": "Lerncoaching für Kinder, Jugendliche und Erwachsene",
+    "home.point2": "Psychotherapie und psychologische Beratung",
+    "home.point3": "Eltern- und Lehrpersonenberatung",
+    "home.point4": "Einzel- und Gruppensupervisionen für Lehrpersonen",
+    "home.point5": "Workshops und Vorträge",
+    "home.current": "AKTUELL",
+    "home.currentTitle": "«Resilienisch - Ein Sprachkurs für innere Stärke»",
 
-export default function SoulunayaPage() {
+    "offerings.badge": "Unser Angebot",
+    "offerings.title": "Angebote",
+    
+    "offerings.lerncoaching.title": "Lerncoaching für Kinder, Jugendliche und Erwachsene",
+    "offerings.lerncoaching.description": "In einem individuellen Lerncoaching wird gemeinsam nach passenden Lösungen gesucht, die das Lernverhalten nachhaltig verbessern. Die Anzahl der Sitzungen ist individuell, den Bedürfnissen angepasst und mit Ihnen abgesprochen.",
+    "offerings.lerncoaching.price": "CHF 135.– / 160.- pro Stunde",
+    
+    "offerings.psychotherapie.title": "Psychotherapie und Psychologische Beratung",
+    "offerings.psychotherapie.description": "Wir bieten Psychotherapie und Beratung für Kinder, Jugendliche und Erwachsene an. Dabei legen wir grossen Wert auf die Stärkung der Resilienz und des Selbstwertes. Auch bei der Bewältigung herausfordernder Erfahrungen und Situationen können wir Unterstützung bieten.",
+    "offerings.psychotherapie.price": "CHF 160.- pro Stunde",
+    
+    "offerings.elternberatung.title": "Elternberatung",
+    "offerings.elternberatung.description": "In einer individuellen Elternberatung besprechen wir gemeinsam, wie Sie Ihre familiären Bedürfnisse und die alltäglichen Herausforderungen unter einen Hut bringen. Die Anzahl der Sitzungen ist individuell, den Bedürfnissen angepasst und mit Ihnen abgesprochen.",
+    "offerings.elternberatung.price": "CHF 135.– / 160.- pro Stunde",
+    
+    "offerings.lehrkraefte.title": "Beratung von Lehrkräften und Schulen",
+    "offerings.lehrkraefte.description": "Lehrerin / Lehrer zu sein ist heute anspruchsvoller denn je. Wir bieten Ihnen individuelle Beratungen im Einzel- oder im Gruppensetting an. Die Anzahl der Sitzungen ist individuell, den Bedürfnissen angepasst und mit Ihnen abgesprochen. Gerne können Sie auch mit Weiterbildungsanfragen für Ihr Team an uns gelangen.",
+    "offerings.lehrkraefte.price": "CHF 160.- pro Stunde",
+    
+    "offerings.workshops.title": "Workshops und Vorträge",
+    "offerings.workshops.item1_title": "«Mit Kindern lernen»",
+    "offerings.workshops.item1_desc": "In 90 Minuten vermitteln wir Elternvereinen und Schulen praktische Tipps zum Thema «Mit Kindern lernen».",
+    "offerings.workshops.item1_price": "CHF 600.– (inkl. Vorbereitung, Anreise und Reisespesen)",
+    "offerings.workshops.item2_title": "«Resilienisch - Ein Sprachkurs für innere Stärke»",
+    "offerings.workshops.item2_desc": "In 90 Minuten werden Eltern und Schulen die Grundprinzipien einer stärkenden Kommunikation vermittelt.",
+    "offerings.workshops.item2_price": "Preis auf Anfrage (inkl. Vorbereitung, Anreise und Reisespesen) – für Partnerschulen von fit4future kostenlos",
+    "offerings.workshops.item3_title": "«Freundschaften: Warum Kinder sie brauchen und wie Eltern sie stärken können»",
+    "offerings.workshops.item3_desc": "In 90 Minuten vermitteln wir praktische Tipps zum Thema «Kinderfreundschaften».",
+    "offerings.workshops.item3_price": "CHF 600.– (inkl. Vorbereitung, Anreise und Reisespesen)",
+    "offerings.workshops.item4_title": "«Clever lernen» Workshop für 11- bis 13-jährige",
+    "offerings.workshops.item4_desc": "In zwei Treffen à 2 ½ Stunden vermitteln wir konkrete Tipps und Tricks rund ums «Clever lernen».",
+    "offerings.workshops.item4_price": "CHF 195.– (inkl. Buch «Clever lernen» von S. Rietzler und F. Grolimund, 2018)",
+    "offerings.workshops.dates_title": "Nächste Workshop-Termine 2025",
+    "offerings.workshops.date1": "FORUM Colibri, Kinderarztpraxis Luzern Süd, Ringstrasse 37, 6010 Kriens",
+    "offerings.workshops.date1_email": "Anmeldung: nz@sternenklar-lernen.ch oder sa@sternenklar-lernen.ch",
+    "offerings.workshops.date2": "fit4school Mutschellen, Bahnhofstrasse 1, 8965 Berikon",
+    "offerings.workshops.date2_email": "Anmeldung: nds@sternenklar-lernen.ch",
+    "offerings.workshops.note": "Ab vier TeilnehmerInnen organisieren wir den nächsten Workshop auch gerne ausserhalb der publizierten Daten.",
+    
+    "offerings.supervision.title": "Einzel- und Gruppensupervision für Lehrpersonen",
+    "offerings.supervision.description": "Für Lehrpersonen aller Schulstufen und Fachrichtungen, die an einer professionellen Weiterentwicklung interessiert sind, bieten wir individuelle und gruppenbasierte Supervision an. Ziel ist es, Kompetenzen zu stärken, den Austausch mit Kolleginnen und Kollegen zu fördern und neue Perspektiven zu gewinnen.",
+    "offerings.supervision.price": "CHF 170.- pro Stunde (Bei Gruppenanmeldungen sind ermässigte Tarife möglich)",
+    
+    "offerings.contact": "Kontakt / Anmeldung",
+    
+    "about.badge": "Über uns",
+    "about.title": "Unser Team",
+    "about.teamPhoto": "Unser Team",
+    
+    "about.sandra.name": "Sandra Andermatt",
+    "about.sandra.title": "Eidg. anerkannte Psychotherapeutin | Fachpsychologin für Kinder- und Jugendpsychologie FSP | Fachpsychologin für Psychotherapie FSP | Lerncoach",
+    "about.sandra.bio1": "Eidg. anerkannte Psychotherapeutin, wilob Lenzburg",
+    "about.sandra.bio2": "Ausbildung zum Lerncoach, Akademie für Lerncoaching, Zürich Altstetten",
+    "about.sandra.bio3": "Master of Advanced Studies in Kinder- und Jugendpsychologie FSP, Universität Basel",
+    "about.sandra.bio4": "Master in Klinischer Psychologie und Gesundheitspsychologie, Universität Fribourg",
+    "about.sandra.bio5": "Mehrere Jahre Berufserfahrung als Schulpsychologin",
+    "about.sandra.region": "Region Zentralschweiz und Zürich",
+    
+    "about.nadezhda.name": "Nadezhda De Salvador",
+    "about.nadezhda.title": "Schulische Heilpädagogin und Lerncoach",
+    "about.nadezhda.bio1": "Systemisch-ressourcenorientiertes Arbeiten mit Kindern, Jugendlichen und ihrem Umfeld, CAS, wilob Lenzburg",
+    "about.nadezhda.bio2": "Resilienztrainerin für Kinder, Resilienz-Schule Freising",
+    "about.nadezhda.bio3": "Ausbildung zum Lerncoach, Akademie für Lerncoaching, Zürich Altstetten",
+    "about.nadezhda.bio4": "Coaching Praktikerin, CAS, FHNW Olten",
+    "about.nadezhda.bio5": "Master in Special Needs Education, HfH Zürich",
+    "about.nadezhda.bio6": "Weiterbildung zur Dyskalkulietherapeutin, Lerntherapiezentrum Basel",
+    "about.nadezhda.bio7": "Mehrere Jahre Berufserfahrung als Schulische Heilpädagogin",
+    "about.nadezhda.region": "Widen, Kanton Aargau",
+    
+    "about.natascha.name": "Natascha Zoller",
+    "about.natascha.title": "Kinder- und Jugendpsychologin und Lerncoach",
+    "about.natascha.bio1": "In Ausbildung zur eidg. anerkannten Psychotherapeutin, KJF Luzern",
+    "about.natascha.bio2": "Ausbildung zum Lerncoach, Akademie für Lerncoaching, Zürich Altstetten",
+    "about.natascha.bio3": "Weiterbildungen in bindungsbasierter Beratung und Therapie",
+    "about.natascha.bio4": "Master in Klinischer Psychologie und Entwicklungspsychologie, Universität Bern",
+    "about.natascha.bio5": "Mehrere Jahre Berufserfahrung als Schulpsychologin",
+    "about.natascha.region": "Region Zentralschweiz",
+    
+    "about.current": "AKTUELL",
+    "about.currentTitle": "«Resilienisch - Ein Sprachkurs für innere Stärke»",
+    
+    "contact.badge": "Kontakt",
+    "contact.title": "Kontakt",
+    "contact.subtitle": "Wir freuen uns auf Ihre Kontaktaufnahme.",
+    "contact.sandra.name": "Sandra Andermatt",
+    "contact.sandra.note": "nimmt keine neuen KlientInnen auf",
+    "contact.sandra.region": "Region Zentralschweiz",
+    "contact.nadezhda.name": "Nadezhda De Salvador",
+    "contact.nadezhda.region": "Widen, Kanton Aargau",
+    "contact.natascha.name": "Natascha Zoller",
+    "contact.natascha.region": "Region Zentralschweiz",
+    
+    "conditions.badge": "Konditionen",
+    "conditions.title": "Konditionen",
+    "conditions.intro": "Bitte beachten Sie unsere Konditionen",
+    "conditions.rate1": "Beratungs- und Coachingtermine bei Sandra Andermatt / Natascha Zoller",
+    "conditions.rate1Price": "CHF 160.-",
+    "conditions.rate2": "Supervisionen bei Sandra Andermatt / Natascha Zoller",
+    "conditions.rate2Price": "CHF 170.-",
+    "conditions.rate3": "Beratungs- und Coachingtermine bei Nadezhda De Salvador",
+    "conditions.rate3Price": "CHF 135.-",
+    "conditions.included": "Telefonate und E-Mails bis zu 15 Minuten sind im Preis inbegriffen.",
+    "conditions.travel": "Bitte beachten Sie, dass zu den Grundkosten die Fahrtkosten von CHF 0.70 pro Kilometer hinzukommen.",
+    "conditions.cancellation": "Im Verhinderungsfall bitten wir Sie, uns spätestens 24 Stunden vorher zu benachrichtigen. Andernfalls wird Ihnen der ganze Betrag in Rechnung gestellt.",
+    
+    "legal.title": "Impressum & Datenschutz",
+    "footer.copyright": "© 2026 sternenklar lernen – Alle Rechte vorbehalten",
+  },
+  en: {
+    "nav.home": "Home",
+    "nav.offerings": "Services",
+    "nav.about": "About Us",
+    "nav.conditions": "Terms",
+    "nav.contact": "Contact",
+
+    "home.badge": "Welcome",
+    "home.title": "Learning Coaching & Psychotherapy",
+    "home.subtitle": "In a relaxed and creative atmosphere, we professionally accompany you in finding solutions and experiencing new possibilities.",
+    "home.point1": "Learning coaching for children, teenagers, and adults",
+    "home.point2": "Psychotherapy and psychological counseling",
+    "home.point3": "Parent and teacher counseling",
+    "home.point4": "Individual and group supervision for teachers",
+    "home.point5": "Workshops and lectures",
+    "home.current": "CURRENT",
+    "home.currentTitle": "«Resilienisch - A language course for inner strength»",
+
+    "offerings.badge": "Our Services",
+    "offerings.title": "Services",
+    
+    "offerings.lerncoaching.title": "Learning Coaching for Children, Teenagers & Adults",
+    "offerings.lerncoaching.description": "In individual learning coaching, we work together to find suitable solutions that sustainably improve learning behavior. The number of sessions is individual, tailored to your needs, and discussed with you.",
+    "offerings.lerncoaching.price": "CHF 135.– / 160.- per hour",
+    
+    "offerings.psychotherapie.title": "Psychotherapy and Psychological Counseling",
+    "offerings.psychotherapie.description": "We offer psychotherapy and counseling for children, teenagers, and adults. We place great emphasis on strengthening resilience and self-esteem. We can also offer support in coping with challenging experiences and situations.",
+    "offerings.psychotherapie.price": "CHF 160.- per hour",
+    
+    "offerings.elternberatung.title": "Parent Counseling",
+    "offerings.elternberatung.description": "In individual parent counseling, we discuss together how to balance your family needs and daily challenges. The number of sessions is individual, tailored to your needs, and discussed with you.",
+    "offerings.elternberatung.price": "CHF 135.– / 160.- per hour",
+    
+    "offerings.lehrkraefte.title": "Counseling for Teachers and Schools",
+    "offerings.lehrkraefte.description": "Being a teacher is more challenging than ever. We offer individual counseling in individual or group settings. The number of sessions is individual, tailored to your needs, and discussed with you. You are also welcome to contact us with training requests for your team.",
+    "offerings.lehrkraefte.price": "CHF 160.- per hour",
+    
+    "offerings.workshops.title": "Workshops and Lectures",
+    "offerings.workshops.item1_title": "«Learning with Children»",
+    "offerings.workshops.item1_desc": "In 90 minutes, we provide practical tips on the topic of 'Learning with Children' to parent associations and schools.",
+    "offerings.workshops.item1_price": "CHF 600.– (incl. preparation, travel and expenses)",
+    "offerings.workshops.item2_title": "«Resilienisch - A language course for inner strength»",
+    "offerings.workshops.item2_desc": "In 90 minutes, parents and schools learn the basic principles of empowering communication.",
+    "offerings.workshops.item2_price": "Price on request (incl. preparation, travel and expenses) – free for fit4future partner schools",
+    "offerings.workshops.item3_title": "«Friendships: Why children need them and how parents can strengthen them»",
+    "offerings.workshops.item3_desc": "In 90 minutes, we provide practical tips on the topic of 'Children's friendships'.",
+    "offerings.workshops.item3_price": "CHF 600.– (incl. preparation, travel and expenses)",
+    "offerings.workshops.item4_title": "«Clever Learning» Workshop for ages 11-13",
+    "offerings.workshops.item4_desc": "In two sessions of 2.5 hours each, we teach concrete tips and tricks about 'Clever Learning'.",
+    "offerings.workshops.item4_price": "CHF 195.– (incl. book 'Clever lernen' by S. Rietzler and F. Grolimund, 2018)",
+    "offerings.workshops.dates_title": "Upcoming Workshop Dates 2025",
+    "offerings.workshops.date1": "FORUM Colibri, Kinderarztpraxis Luzern Süd, Ringstrasse 37, 6010 Kriens",
+    "offerings.workshops.date1_email": "Registration: nz@sternenklar-lernen.ch or sa@sternenklar-lernen.ch",
+    "offerings.workshops.date2": "fit4school Mutschellen, Bahnhofstrasse 1, 8965 Berikon",
+    "offerings.workshops.date2_email": "Registration: nds@sternenklar-lernen.ch",
+    "offerings.workshops.note": "From four participants onwards, we are happy to organize the next workshop outside the published dates.",
+    
+    "offerings.supervision.title": "Individual and Group Supervision for Teachers",
+    "offerings.supervision.description": "For teachers of all grade levels and subject areas interested in professional development, we offer individual and group supervision. The goal is to strengthen competencies, promote exchange with colleagues, and gain new perspectives.",
+    "offerings.supervision.price": "CHF 170.- per hour (Discounted rates available for group registrations)",
+    
+    "offerings.contact": "Contact / Registration",
+    
+    "about.badge": "About Us",
+    "about.title": "Our Team",
+    "about.teamPhoto": "Our Team",
+    
+    "about.sandra.name": "Sandra Andermatt",
+    "about.sandra.title": "Federally recognized psychotherapist | Specialist in child and adolescent psychology FSP | Specialist in psychotherapy FSP | Learning coach",
+    "about.sandra.bio1": "Federally recognized psychotherapist, wilob Lenzburg",
+    "about.sandra.bio2": "Training as a learning coach, Academy for Learning Coaching, Zurich Altstetten",
+    "about.sandra.bio3": "Master of Advanced Studies in Child and Adolescent Psychology FSP, University of Basel",
+    "about.sandra.bio4": "Master in Clinical Psychology and Health Psychology, University of Fribourg",
+    "about.sandra.bio5": "Several years of professional experience as a school psychologist",
+    "about.sandra.region": "Central Switzerland and Zurich region",
+    
+    "about.nadezhda.name": "Nadezhda De Salvador",
+    "about.nadezhda.title": "School Special Educator and Learning Coach",
+    "about.nadezhda.bio1": "Systemic resource-oriented work with children, adolescents and their environment, CAS, wilob Lenzburg",
+    "about.nadezhda.bio2": "Resilience trainer for children, Resilience School Freising",
+    "about.nadezhda.bio3": "Training as a learning coach, Academy for Learning Coaching, Zurich Altstetten",
+    "about.nadezhda.bio4": "Coaching practitioner, CAS, FHNW Olten",
+    "about.nadezhda.bio5": "Master in Special Needs Education, HfH Zurich",
+    "about.nadezhda.bio6": "Further training as a dyscalculia therapist, Learning Therapy Center Basel",
+    "about.nadezhda.bio7": "Several years of professional experience as a school special educator",
+    "about.nadezhda.region": "Widen, Canton Aargau",
+    
+    "about.natascha.name": "Natascha Zoller",
+    "about.natascha.title": "Child and Adolescent Psychologist and Learning Coach",
+    "about.natascha.bio1": "In training as a federally recognized psychotherapist, KJF Lucerne",
+    "about.natascha.bio2": "Training as a learning coach, Academy for Learning Coaching, Zurich Altstetten",
+    "about.natascha.bio3": "Further training in attachment-based counseling and therapy",
+    "about.natascha.bio4": "Master in Clinical Psychology and Developmental Psychology, University of Bern",
+    "about.natascha.bio5": "Several years of professional experience as a school psychologist",
+    "about.natascha.region": "Central Switzerland region",
+    
+    "about.current": "CURRENT",
+    "about.currentTitle": "«Resilienisch - A language course for inner strength»",
+    
+    "contact.badge": "Contact",
+    "contact.title": "Contact",
+    "contact.subtitle": "We look forward to hearing from you.",
+    "contact.sandra.name": "Sandra Andermatt",
+    "contact.sandra.note": "not accepting new clients",
+    "contact.sandra.region": "Central Switzerland region",
+    "contact.nadezhda.name": "Nadezhda De Salvador",
+    "contact.nadezhda.region": "Widen, Canton Aargau",
+    "contact.natascha.name": "Natascha Zoller",
+    "contact.natascha.region": "Central Switzerland region",
+    
+    "conditions.badge": "Terms",
+    "conditions.title": "Terms and Conditions",
+    "conditions.intro": "Please note our terms and conditions",
+    "conditions.rate1": "Counseling and coaching sessions with Sandra Andermatt / Natascha Zoller",
+    "conditions.rate1Price": "CHF 160.-",
+    "conditions.rate2": "Supervisions with Sandra Andermatt / Natascha Zoller",
+    "conditions.rate2Price": "CHF 170.-",
+    "conditions.rate3": "Counseling and coaching sessions with Nadezhda De Salvador",
+    "conditions.rate3Price": "CHF 135.-",
+    "conditions.included": "Phone calls and emails up to 15 minutes are included in the price.",
+    "conditions.travel": "Please note that travel costs of CHF 0.70 per kilometer are added to the basic costs.",
+    "conditions.cancellation": "In case of cancellation, please notify us at least 24 hours in advance. Otherwise, the full amount will be charged.",
+    
+    "legal.title": "Imprint & Privacy",
+    "footer.copyright": "© 2026 sternenklar lernen – All rights reserved",
+  }
+};
+
+export default function SternenklarPage() {
   return (
     <LanguageProvider>
       <PageContent />
@@ -57,102 +308,31 @@ export default function SoulunayaPage() {
 }
 
 function PageContent() {
-  const { t, language } = useLanguage();
-  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const { language } = useLanguage();
   const [showLegal, setShowLegal] = React.useState(false);
-  const [legalContent, setLegalContent] = React.useState<React.ReactNode>(null);
+  const [mounted, setMounted] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  // Auto-rotate slideshow - smoother with longer duration and better timing
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % slideshowImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    setMounted(true);
   }, []);
 
+  const getText = (key: string): string => {
+    const lang = language as 'de' | 'en';
+    return translations[lang][key as keyof typeof translations.de] || translations.de[key as keyof typeof translations.de] || key;
+  };
+
   const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // Function to generate legal section content dynamically based on current language
-  const generateLegalContent = React.useCallback(() => {
-    return (
-      <section className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
-        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3 sm:mb-4">{t("legal.title")}</h2>
-            <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
-          </div>
-          <div className="space-y-6 sm:space-y-8">
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.owner")}</h3>
-              <div className="text-sm sm:text-base text-gray-600 space-y-1">
-                <p>Sandra Andermatt</p>
-                <p>Amlehnstrasse 48</p>
-                <p>6010 Kriens</p>
-                <p>+41 79 810 57 72</p>
-                <p className="break-words">sandra.andermatt@psychologie.ch</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.websiteInfo")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.websiteInfoText1")}</p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">{t("legal.websiteInfoText2")}</p>
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.liability")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.liabilityText")}</p>
-              <div className="text-xs text-gray-500 mt-2 sm:mt-3 space-y-1">
-                <p>Phone: Gregor Cresnar, <a href="https://www.flaticon.com/free-icons/phone" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-                <p>Email: Freepik, <a href="https://www.flaticon.com/free-icons/email" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-                <p>Instagram: Freepik, <a href="https://www.flaticon.com/free-icons/instagram" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#793A29]">Flaticon</a></p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.copyright")}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.copyrightText1")}</p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mt-2 sm:mt-3">{t("legal.copyrightText2")}</p>
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">{t("legal.privacy")}</h3>
-              <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">{t("legal.privacyDate")}</p>
-              <h4 className="font-semibold text-gray-800 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.responsible")}</h4>
-              <p className="text-sm sm:text-base text-gray-600">Sandra Andermatt, Amlehnstrasse 48, 6010 Kriens</p>
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.psychotherapy")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.psychotherapyText")}</p>
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.websitePrivacy")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.websitePrivacyText")}</p>
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.rights")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.rightsText")}</p>
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.security")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.securityText")}</p>
-              <h4 className="font-semibold text-gray-800 mt-3 sm:mt-4 mb-1 sm:mb-2 text-sm sm:text-base">{t("legal.changes")}</h4>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{t("legal.changesText")}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }, [t]);
-
-  // Update legal content when language changes and legal section is visible
-  React.useEffect(() => {
-    if (showLegal) {
-      setLegalContent(generateLegalContent());
-    }
-  }, [language, generateLegalContent, showLegal]);
-
-  // Toggle legal section function
   const toggleLegalSection = () => {
-    if (showLegal) {
-      setShowLegal(false);
-      setLegalContent(null);
-    } else {
-      setLegalContent(generateLegalContent());
-      setShowLegal(true);
+    setShowLegal(!showLegal);
+    if (!showLegal) {
       setTimeout(() => {
         const impressumElement = document.getElementById("impressum");
         if (impressumElement) {
@@ -162,464 +342,528 @@ function PageContent() {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const navItems = [
+    { id: "home", label: "nav.home", onClick: () => scrollToTop() },
+    { id: "angebote", label: "nav.offerings", onClick: () => scrollToSection("angebote") },
+    { id: "about", label: "nav.about", onClick: () => scrollToSection("about") },
+    { id: "conditions", label: "nav.conditions", onClick: () => scrollToSection("conditions") },
+    { id: "kontakt", label: "nav.contact", onClick: () => scrollToSection("kontakt") },
+  ];
+
+  const OfferingCard = ({ icon: Icon, title, description, price }: any) => (
+    <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group h-full">
+      <div className="h-1.5" style={{ backgroundColor: colors.primary }}></div>
+      <CardContent className="p-5 sm:p-6">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: colors.primary }} />
+        </div>
+        <h3 className="text-base sm:text-lg font-serif font-semibold text-center text-gray-800 mb-3">{title}</h3>
+        <div className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4">{description}</div>
+        {price && <p className="text-sm font-medium text-center mb-4" style={{ color: colors.primary }}>{price}</p>}
+        <div className="mt-4 pt-4 border-t border-gray-100 text-center">
+          <button 
+            onClick={() => scrollToSection("kontakt")}
+            className="text-xs sm:text-sm font-medium hover:underline flex items-center justify-center gap-1 mx-auto"
+            style={{ color: colors.primary }}
+          >
+            {getText("offerings.contact")} <ChevronRight className="w-3 h-3" />
+          </button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  // Team member - Portrait fully visible (using contain instead of cover)
+  const TeamMember = ({ name, title, bio, region, phone, email, photoPath }: any) => (
+    <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
+      <div className="h-1.5" style={{ backgroundColor: colors.accent }}></div>
+      {/* Photo Banner - full portrait visible with object-contain and white background */}
+      <div className="relative w-full bg-white flex items-center justify-center p-4" style={{ minHeight: "280px" }}>
+        <div className="relative w-full h-64">
+          <Image 
+            src={photoPath} 
+            alt={name} 
+            fill 
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+          />
+        </div>
+      </div>
+      <CardContent className="p-5 sm:p-6 flex-1">
+        <div className="text-center mb-4">
+          <h3 className="font-serif font-semibold text-gray-800">{name}</h3>
+          <p className="text-xs text-gray-500 mt-1">{title}</p>
+        </div>
+        <div className="space-y-1.5 text-xs sm:text-sm text-gray-600">
+          {bio.map((item: string, idx: number) => (
+            <p key={idx} className="leading-relaxed">• {item}</p>
+          ))}
+        </div>
+        <div className="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500 space-y-1">
+          <p className="flex items-center justify-center gap-2"><MapPin className="w-3 h-3" /> {region}</p>
+          <p className="flex items-center justify-center gap-2"><Phone className="w-3 h-3" /> {phone}</p>
+          <p className="flex items-center justify-center gap-2 break-all"><Mail className="w-3 h-3" /> {email}</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: colors.warmWhite }}>
-      <LanguageToggle />
+      {/* Header with transparent background */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            {/* Logo - Extra Large */}
+            <button onClick={scrollToTop} className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
+              <div className="relative w-14 h-14 md:w-20 md:h-20">
+                <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain" />
+              </div>
+             
+            </button>
 
-      {/* Hero Section - Rich artistic gradient background with more shades */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Main multi-stop gradient with richer brown spectrum */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#5A2B1F] via-[#7A3B2A] via-[#8B4633] via-[#9B4E3A] to-[#C17A5B]"></div>
-        
-        {/* Diagonal gradient for depth - dark to light */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#3D1C12] via-[#7A3B2A] to-[#D4A07A]/30"></div>
-        
-        {/* Radial burst from center */}
-        <div className="absolute inset-0 bg-radial-gradient from-[#C17A5B]/20 via-[#7A3B2A]/10 to-transparent"></div>
-        
-        {/* Warm overlay for richness */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3D1C12]/40 via-[#8B4633]/20 to-[#C17A5B]/20"></div>
-        
-        {/* Cross gradient for more depth */}
-        <div className="absolute inset-0 bg-gradient-to-l from-[#5A2B1F]/50 via-transparent to-[#9B4E3A]/30"></div>
-        
-        {/* Subtle noise texture overlay for artistic feel */}
-        <div className="absolute inset-0 opacity-30 mix-blend-overlay" 
-          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.3\' /%3E%3C/svg%3E")', backgroundRepeat: 'repeat' }}>
-        </div>
-        
-        {/* Vignette effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
-        
-        {/* Decorative light particles - artistic touch */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-[#D4A07A]/10 blur-3xl animate-pulse delay-700"></div>
-          <div className="absolute top-2/3 left-1/2 w-72 h-72 rounded-full bg-[#C17A5B]/15 blur-3xl animate-pulse delay-1500"></div>
-        </div>
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <button key={item.id} onClick={item.onClick} className="text-sm text-white hover:text-[#60C2D0] transition-colors drop-shadow-md">
+                  {getText(item.label)}
+                </button>
+              ))}
+            </nav>
 
-        <div className="relative z-10 text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            {/* Smaller logo container */}
-            <div className="w-60 h-60 sm:w-72 sm:h-72 md:w-[22rem] md:h-[22rem] lg:w-[26rem] lg:h-[26rem] xl:w-[30rem] xl:h-[30rem] mx-auto mb-6 sm:mb-8 relative">
-              <Image
-                src="/images/logo-3.png"
-                alt="Soulunaya Logo"
-                fill
-                className="object-contain drop-shadow-2xl"
-                priority
-              />
+            <div className="hidden md:block">
+              <LanguageToggle />
             </div>
-            <div className="w-24 sm:w-32 h-0.5 mx-auto bg-white/40"></div>
+
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg bg-white/20 backdrop-blur-sm">
+              {mobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4 bg-white/95 backdrop-blur-sm rounded-lg mt-2">
+              <div className="flex flex-col gap-3 px-4">
+                {navItems.map((item) => (
+                  <button key={item.id} onClick={item.onClick} className="text-sm text-gray-600 hover:text-[#4A7B6B] transition-colors py-2 text-left">
+                    {getText(item.label)}
+                  </button>
+                ))}
+                <div className="pt-2 border-t border-gray-100">
+                  <LanguageToggle />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section - Extra Large Logo */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2E5B4B] via-[#4A7B6B] to-[#6B9B8B]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+            {/* Hero Logo - Extra Extra Large */}
+            <div className="flex justify-center mb-8">
+              <div className="relative w-48 h-48 md:w-64 md:h-64">
+                <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain brightness-0 invert" />
+              </div>
+            </div>
+            
+            <div className="w-20 h-0.5 bg-white/40 mx-auto mb-6"></div>
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+              {getText("home.subtitle")}
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-2 text-white/80 text-sm">
+              <p>✓ {getText("home.point1")}</p>
+              <p>✓ {getText("home.point2")}</p>
+              <p>✓ {getText("home.point3")}</p>
+              <p>✓ {getText("home.point4")}</p>
+              <p>✓ {getText("home.point5")}</p>
+            </div>
+            <div className="mt-10">
+              <Badge className="bg-white/20 text-white border-none px-4 py-2">{getText("home.current")}</Badge>
+              <p className="text-white/90 mt-2 italic">{getText("home.currentTitle")}</p>
+            </div>
           </motion.div>
         </div>
 
-        {/* Custom scroll indicator - modern and minimalist */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-            className="cursor-pointer"
-            onClick={() => scrollToSection("welcome")}
-          >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }} className="cursor-pointer" onClick={() => scrollToSection("angebote")}>
             <div className="flex flex-col items-center gap-2">
               <span className="text-white/70 text-xs tracking-wider font-light">SCROLL</span>
-              <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+              <div className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent"></div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Welcome Section with Vertical Slideshow on Left */}
-      <section id="welcome" className="py-12 sm:py-16 md:py-20 lg:py-32">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-{/* Left Side - Vertical Slideshow - CROSSFADE TRANSITION */}
-<div className="relative h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl order-1 md:order-none">
-  {slideshowImages.map((img, idx) => (
-    <motion.div
-      key={idx}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: currentImageIndex === idx ? 1 : 0 }}
-      transition={{ duration: 5, ease: "easeInOut" }}
-      className="absolute inset-0"
-      style={{ pointerEvents: currentImageIndex === idx ? "auto" : "none" }}
-    >
-      <Image
-        src={img}
-        alt={`Soulunaya slideshow ${idx + 1}`}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, 50vw"
-        priority={idx === 0}
-      />
-    </motion.div>
-  ))}
-  
-  {/* Slideshow indicators */}
-  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-    {slideshowImages.map((_, idx) => (
-      <button
-        key={idx}
-        onClick={() => setCurrentImageIndex(idx)}
-        className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${
-          idx === currentImageIndex ? "w-4 sm:w-6 bg-white" : "bg-white/50"
-        }`}
-        aria-label={`Go to slide ${idx + 1}`}
-      />
-    ))}
-  </div>
-</div>
-
-            {/* Right Side - Welcome Text */}
-            <div className="order-2 md:order-none">
-              <Badge className="mb-3 sm:mb-4 bg-[#793A29]/10 text-[#793A29] border-none text-xs sm:text-sm">
-                <Sparkles className="w-3 h-3 mr-1" /> {t("welcome.badge")}
-              </Badge>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-4 sm:mb-6">
-                {t("welcome.title")} <span style={{ color: colors.primary }}>{t("soulunaya")}</span>
-              </h1>
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-4 sm:mb-6">
-                {t("welcome.intro")}
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6">
-                {t("welcome.description")}
-              </p>
-              
-              <div className="bg-[#793A29]/5 p-4 sm:p-6 rounded-xl border-l-4" style={{ borderColor: colors.primary }}>
-                <p className="text-sm sm:text-base text-gray-700 italic leading-relaxed">
-                  {t("welcome.quote")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Angebot Section - Therapy, Breath, Silent Walk, SoundJourney, Travel */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
+      {/* Angebot Section */}
+      <section id="angebote" className="py-12 sm:py-16 md:py-20 lg:py-24" style={{ backgroundColor: colors.lightGray }}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <Badge className="mb-3 sm:mb-4 bg-[#793A29]/10 text-[#793A29] border-none text-xs sm:text-sm">
-              <Star className="w-3 h-3 mr-1" /> {t("offerings.badge")}
+            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
+              <Star className="w-3 h-3 mr-1" /> {getText("offerings.badge")}
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-3 sm:mb-4">{t("offerings.title")}</h2>
-            <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("offerings.title")}</h2>
+            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {/* SouLunAya Therapy */}
-            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group">
-              <div className="h-2" style={{ backgroundColor: colors.primary }}></div>
-              <CardContent className="p-5 sm:p-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
-                  <Heart className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.primary }} />
-                </div>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("offerings.therapy.title")}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
-                  {t("offerings.therapy.subtitle")}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {t("offerings.therapy.description")}
-                </p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                  <p className="text-xs sm:text-sm text-gray-500">{t("offerings.therapy.price1")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 160.-</span> / {t("offerings.therapy.perHour")}</p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">{t("offerings.therapy.price2")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 140.-</span> / {t("offerings.therapy.perHour")}</p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">{t("offerings.therapy.price3")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 120.-</span> / {t("offerings.therapy.perHour")}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* SouLunAya Breath */}
-            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group">
-              <div className="h-2" style={{ backgroundColor: colors.primary }}></div>
-              <CardContent className="p-5 sm:p-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
-                  <Wind className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.primary }} />
-                </div>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("offerings.breath.title")}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
-                  {t("offerings.breath.subtitle")}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {t("offerings.breath.description")}
-                </p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                  <p className="text-xs sm:text-sm text-gray-500">{t("offerings.breath.firstSession")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 50.-</span></p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">{t("offerings.breath.followUp")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 160.-</span></p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* SouLunAya Silent BreathWalk */}
-            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group sm:col-span-2 lg:col-span-1">
-              <div className="h-2" style={{ backgroundColor: colors.primary }}></div>
-              <CardContent className="p-5 sm:p-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
-                  <Leaf className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.primary }} />
-                </div>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("offerings.silentWalk.title")}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
-                  {t("offerings.silentWalk.subtitle")}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {t("offerings.silentWalk.description")}
-                </p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                  <p className="text-xs sm:text-sm text-gray-500">{t("offerings.silentWalk.price")} <span className="font-semibold" style={{ color: colors.primary }}>CHF 10.-</span> {t("offerings.silentWalk.perWalk")}</p>
-                  <p className="text-xs text-gray-400 mt-1">{t("offerings.silentWalk.time")} | {t("offerings.silentWalk.location")}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* SoundJourney - Now in same Card design */}
-            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group sm:col-span-2 lg:col-span-1">
-              <div className="h-2" style={{ backgroundColor: colors.primary }}></div>
-              <CardContent className="p-5 sm:p-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
-                  <Music className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.primary }} />
-                </div>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("soundJourney.title")}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
-                  {t("soundJourney.subtitle")}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {t("soundJourney.description")}
-                </p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                  <p className="text-xs sm:text-sm text-gray-500">{t("soundJourney.priceLabel")} <span className="font-semibold" style={{ color: colors.primary }}>{t("soundJourney.price")}</span> / {t("soundJourney.perPerson")}</p>
-                  <p className="text-xs text-gray-400 mt-1">{t("soundJourney.duration")} | {t("soundJourney.registration")}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Soulunaya Travel - Now in same Card design */}
-            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group sm:col-span-2 lg:col-span-1">
-              <div className="h-2" style={{ backgroundColor: colors.sage }}></div>
-              <CardContent className="p-5 sm:p-6">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.sage}20` }}>
-                  <Plane className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: colors.sage }} />
-                </div>
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-center text-gray-800 mb-2 sm:mb-3">{t("travel.title")}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">
-                  {t("travel.subtitle")}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {t("travel.description")}
-                </p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-                  <p className="text-xs sm:text-sm text-gray-500">{t("travel.info")}</p>
-                  <p className="text-xs text-gray-400 mt-1">{t("travel.nextDestination")}</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section with Photo on Right */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-32" style={{ backgroundColor: colors.lightGray }}>
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-            {/* Left - About Text */}
-            <div className="order-2 md:order-none">
-              <Badge className="mb-3 sm:mb-4 bg-[#793A29]/10 text-[#793A29] border-none text-xs sm:text-sm">
-                <Award className="w-3 h-3 mr-1" /> {t("about.badge")}
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-4 sm:mb-6">
-                {t("about.name")}
-                <span className="block text-base sm:text-lg font-sans text-gray-500 mt-1 sm:mt-2">{t("about.title")}</span>
-              </h2>
-              
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6">
-                {t("about.description")}
-              </p>
-
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm sm:text-base">
-                    <Briefcase className="w-4 h-4" style={{ color: colors.primary }} /> {t("about.experience.title")}
-                  </h3>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-gray-600">
-                    <li><span className="font-medium">{t("about.experience.item1.year")}</span> – {t("about.experience.item1.text")}</li>
-                    <li><span className="font-medium">{t("about.experience.item2.year")}</span> – {t("about.experience.item2.text")}</li>
-                    <li><span className="font-medium">{t("about.experience.item3.year")}</span> – {t("about.experience.item3.text")}</li>
-                    <li><span className="font-medium">{t("about.experience.item4.year")}</span> – {t("about.experience.item4.text")}</li>
-                    <li><span className="font-medium">{t("about.experience.item5.year")}</span> – {t("about.experience.item5.text")}</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-sm sm:text-base">
-                    <GraduationCap className="w-4 h-4" style={{ color: colors.primary }} /> {t("about.education.title")}
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs sm:text-sm text-gray-600">
-                    <p>• {t("about.education.item1")}</p>
-                    <p>• {t("about.education.item2")}</p>
-                    <p>• {t("about.education.item3")}</p>
-                    <p>• {t("about.education.item4")}</p>
-                    <p>• {t("about.education.item5")}</p>
-                    <p>• {t("about.education.item6")}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right - Photo */}
-            <div className="relative order-1 md:order-none">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <div className="aspect-[3/4] relative">
-                  <Image
-                    src="/images/sandra.webp"
-                    alt="Sandra Andermatt"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
-              <div className="absolute -bottom-3 sm:-bottom-4 -left-3 sm:-left-4 w-16 h-16 sm:w-24 sm:h-24 rounded-full" style={{ backgroundColor: `${colors.primary}15` }}></div>
-              <div className="absolute -top-3 sm:-top-4 -right-3 sm:-right-4 w-20 h-20 sm:w-32 sm:h-32 rounded-full" style={{ backgroundColor: `${colors.primary}10` }}></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Horizontal Image Banner */}
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="relative h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
-            <Image
-              src="/images/image-5.webp"
-              alt="Soulunaya Banner"
-              fill
-              className="object-cover"
-              sizes="100vw"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <OfferingCard 
+              icon={BookOpen}
+              title={getText("offerings.lerncoaching.title")}
+              description={getText("offerings.lerncoaching.description")}
+              price={getText("offerings.lerncoaching.price")}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#793A29]/80 to-transparent flex items-center">
-              <div className="ml-4 sm:ml-8 md:ml-16 max-w-[200px] sm:max-w-md">
-                <h3 className="text-lg sm:text-2xl md:text-3xl font-serif text-white mb-1 sm:mb-2">{t("banner.title")}</h3>
-                <p className="text-xs sm:text-base text-white/90">{t("banner.subtitle")}</p>
-              </div>
+            <OfferingCard 
+              icon={Heart}
+              title={getText("offerings.psychotherapie.title")}
+              description={getText("offerings.psychotherapie.description")}
+              price={getText("offerings.psychotherapie.price")}
+            />
+            <OfferingCard 
+              icon={Users}
+              title={getText("offerings.elternberatung.title")}
+              description={getText("offerings.elternberatung.description")}
+              price={getText("offerings.elternberatung.price")}
+            />
+            <OfferingCard 
+              icon={Briefcase}
+              title={getText("offerings.lehrkraefte.title")}
+              description={getText("offerings.lehrkraefte.description")}
+              price={getText("offerings.lehrkraefte.price")}
+            />
+            
+            {/* Workshops Card */}
+            <Card className="border-0 bg-white hover:shadow-xl transition-all duration-300 overflow-hidden group h-full">
+              <div className="h-1.5" style={{ backgroundColor: colors.primary }}></div>
+              <CardContent className="p-5 sm:p-6">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: `${colors.primary}10` }}>
+                  <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: colors.primary }} />
+                </div>
+                <h3 className="text-base sm:text-lg font-serif font-semibold text-center text-gray-800 mb-3">{getText("offerings.workshops.title")}</h3>
+                
+                <div className="space-y-3 text-xs sm:text-sm text-gray-600">
+                  <div>
+                    <p className="font-medium" style={{ color: colors.primary }}>{getText("offerings.workshops.item1_title")}</p>
+                    <p>{getText("offerings.workshops.item1_desc")}</p>
+                    <p className="text-xs mt-1">{getText("offerings.workshops.item1_price")}</p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-2">
+                    <p className="font-medium" style={{ color: colors.primary }}>{getText("offerings.workshops.item2_title")}</p>
+                    <p>{getText("offerings.workshops.item2_desc")}</p>
+                    <p className="text-xs mt-1">{getText("offerings.workshops.item2_price")}</p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-2">
+                    <p className="font-medium" style={{ color: colors.primary }}>{getText("offerings.workshops.item3_title")}</p>
+                    <p>{getText("offerings.workshops.item3_desc")}</p>
+                    <p className="text-xs mt-1">{getText("offerings.workshops.item3_price")}</p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-2">
+                    <p className="font-medium" style={{ color: colors.primary }}>{getText("offerings.workshops.item4_title")}</p>
+                    <p>{getText("offerings.workshops.item4_desc")}</p>
+                    <p className="text-xs mt-1">{getText("offerings.workshops.item4_price")}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t border-gray-100 text-center">
+                  <button onClick={() => scrollToSection("kontakt")} className="text-xs sm:text-sm font-medium hover:underline flex items-center justify-center gap-1 mx-auto" style={{ color: colors.primary }}>
+                    {getText("offerings.contact")} <ChevronRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <OfferingCard 
+              icon={TrendingUp}
+              title={getText("offerings.supervision.title")}
+              description={getText("offerings.supervision.description")}
+              price={getText("offerings.supervision.price")}
+            />
+          </div>
+          
+          {/* Workshop Dates Section */}
+          <div className="mt-10 p-4 sm:p-6 rounded-xl" style={{ backgroundColor: `${colors.primary}10` }}>
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <Calendar className="w-4 h-4" style={{ color: colors.primary }} />
+              {getText("offerings.workshops.dates_title")}
+            </h4>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>• {getText("offerings.workshops.date1")}</p>
+              <p className="text-xs pl-4">{getText("offerings.workshops.date1_email")}</p>
+              <p>• {getText("offerings.workshops.date2")}</p>
+              <p className="text-xs pl-4">{getText("offerings.workshops.date2_email")}</p>
+              <p className="text-xs italic mt-2">{getText("offerings.workshops.note")}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section with Photo */}
-      <section id="kontakt" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-white">
+      {/* About Section - Group Photo 9:16, Team Photos with full portrait visibility */}
+      <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left - Contact Info */}
-            <div className="order-2 md:order-none">
-              <Badge className="mb-3 sm:mb-4 bg-[#793A29]/10 text-[#793A29] border-none text-xs sm:text-sm">
-                <Heart className="w-3 h-3 mr-1" /> {t("contact.badge")}
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-800 mb-4 sm:mb-6">{t("contact.title")}</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-                {t("contact.message")}
-              </p>
+          <div className="text-center mb-8 sm:mb-12">
+            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none text-xs sm:text-sm">
+              <Award className="w-3 h-3 mr-1" /> {getText("about.badge")}
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("about.title")}</h2>
+            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+          </div>
 
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${colors.primary}10` }}>
-                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: colors.primary }} />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm text-gray-500">{t("contact.phone")}</p>
-                    <a href="tel:+41798105772" className="text-sm sm:text-base md:text-lg text-gray-800 hover:text-[#793A29] transition-colors break-words">
-                      +41 79 810 57 72
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${colors.primary}10` }}>
-                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: colors.primary }} />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm text-gray-500">{t("contact.email")}</p>
-                    <a href="mailto:sandra.andermatt@psychologie.ch" className="text-sm sm:text-base md:text-lg text-gray-800 hover:text-[#793A29] transition-colors break-words">
-                      sandra.andermatt@psychologie.ch
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${colors.primary}10` }}>
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: colors.primary }} />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm text-gray-500">{t("contact.address")}</p>
-                    <p className="text-sm sm:text-base text-gray-800">Amlehnstrasse 48, 6010 Kriens</p>
-                  </div>
-                </div>
+          {/* Group Photo - 9:16 aspect ratio (portrait) */}
+          <div className="mb-16 max-w-sm mx-auto">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <div className="aspect-[9/16] relative bg-gray-100">
+                <Image src="/images/team.webp" alt={getText("about.teamPhoto")} fill className="object-cover" />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end">
+                <p className="text-white text-sm sm:text-base p-4 bg-gradient-to-r from-black/50 to-transparent w-full">
+                  {getText("about.teamPhoto")}
+                </p>
+              </div>
+            </div>
+          </div>
 
-              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
-                <div className="flex justify-start gap-3 sm:gap-4">
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style={{ backgroundColor: colors.primary }}>
-                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          {/* Team Members - Full portrait visible with object-contain */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <TeamMember 
+              name={getText("about.sandra.name")}
+              title={getText("about.sandra.title")}
+              bio={[
+                getText("about.sandra.bio1"),
+                getText("about.sandra.bio2"),
+                getText("about.sandra.bio3"),
+                getText("about.sandra.bio4"),
+                getText("about.sandra.bio5"),
+              ]}
+              region={getText("about.sandra.region")}
+              phone="+41 79 810 57 72"
+              email="sa@sternenklar-lernen.ch"
+              photoPath="/images/sandra.webp"
+            />
+            <TeamMember 
+              name={getText("about.nadezhda.name")}
+              title={getText("about.nadezhda.title")}
+              bio={[
+                getText("about.nadezhda.bio1"),
+                getText("about.nadezhda.bio2"),
+                getText("about.nadezhda.bio3"),
+                getText("about.nadezhda.bio4"),
+                getText("about.nadezhda.bio5"),
+                getText("about.nadezhda.bio6"),
+                getText("about.nadezhda.bio7"),
+              ]}
+              region={getText("about.nadezhda.region")}
+              phone="+41 79 761 31 42"
+              email="nds@sternenklar-lernen.ch"
+              photoPath="/images/nadezha.webp"
+            />
+            <TeamMember 
+              name={getText("about.natascha.name")}
+              title={getText("about.natascha.title")}
+              bio={[
+                getText("about.natascha.bio1"),
+                getText("about.natascha.bio2"),
+                getText("about.natascha.bio3"),
+                getText("about.natascha.bio4"),
+                getText("about.natascha.bio5"),
+              ]}
+              region={getText("about.natascha.region")}
+              phone="+41 79 272 70 24"
+              email="nz@sternenklar-lernen.ch"
+              photoPath="/images/natascha.webp"
+            />
+          </div>
+
+          <div className="mt-12 text-center">
+            <Badge className="bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
+              {getText("about.current")}
+            </Badge>
+            <p className="text-gray-700 mt-2 italic">{getText("about.currentTitle")}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Conditions Section */}
+      <section id="conditions" className="py-12 sm:py-16 md:py-20" style={{ backgroundColor: colors.lightGray }}>
+        <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+          <div className="text-center mb-8">
+            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
+              <DollarSign className="w-3 h-3 mr-1" /> {getText("conditions.badge")}
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-serif text-gray-800 mb-3">{getText("conditions.title")}</h2>
+            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <p className="text-gray-600 mt-2 text-sm">{getText("conditions.intro")}</p>
+          </div>
+          
+          <Card className="border-0 shadow-md">
+            <CardContent className="p-6 space-y-4">
+              <div className="flex justify-between items-center border-b pb-2">
+                <span className="text-gray-700">{getText("conditions.rate1")}</span>
+                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate1Price")}</span>
+              </div>
+              <div className="flex justify-between items-center border-b pb-2">
+                <span className="text-gray-700">{getText("conditions.rate2")}</span>
+                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate2Price")}</span>
+              </div>
+              <div className="flex justify-between items-center border-b pb-2">
+                <span className="text-gray-700">{getText("conditions.rate3")}</span>
+                <span className="font-semibold" style={{ color: colors.primary }}>{getText("conditions.rate3Price")}</span>
+              </div>
+              <div className="pt-3 text-sm text-gray-600 space-y-2">
+                <p className="flex items-start gap-2"><AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.included")}</p>
+                <p className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.travel")}</p>
+                <p className="flex items-start gap-2"><Clock className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: colors.primary }} /> {getText("conditions.cancellation")}</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Contact Section - Circular photos */}
+      <section id="kontakt" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12">
+            <Badge className="mb-3 bg-[#4A7B6B]/10 text-[#4A7B6B] border-none">
+              <Heart className="w-3 h-3 mr-1" /> {getText("contact.badge")}
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3">{getText("contact.title")}</h2>
+            <div className="w-16 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            <p className="text-gray-600 mt-4">{getText("contact.subtitle")}</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Sandra Andermatt - Circular photo */}
+            <Card className="border-0 shadow-md h-full">
+              <CardContent className="p-6 text-center">
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+                  <Image src="/images/sandra.webp" alt="Sandra Andermatt" fill className="object-cover" />
+                </div>
+                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.sandra.name")}</h3>
+                <p className="text-xs text-red-500 mb-1">{getText("contact.sandra.note")}</p>
+                <p className="text-xs text-gray-500 mb-3">{getText("contact.sandra.region")}</p>
+                <div className="space-y-2 text-sm">
+                  <a href="tel:+41798105772" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
+                    <Phone className="w-4 h-4" /> +41 79 810 57 72
+                  </a>
+                  <a href="mailto:sa@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
+                    <Mail className="w-4 h-4" /> sa@sternenklar-lernen.ch
                   </a>
                 </div>
-                <div className="mt-3 sm:mt-4">
-                  <div className="text-base sm:text-xl font-light text-gray-800">soulunaya</div>
-                  <div className="text-xs sm:text-sm text-gray-500">{t("sandra.andermatt")}</div>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Right - Contact Photo */}
-            <div className="relative order-1 md:order-none">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <div className="aspect-square relative">
-                  <Image
-                    src="/images/image-4.webp"
-                    alt="Contact Sandra Andermatt"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+            {/* Nadezhda De Salvador - Circular photo */}
+            <Card className="border-0 shadow-md h-full">
+              <CardContent className="p-6 text-center">
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+                  <Image src="/images/nadezha.webp" alt="Nadezhda De Salvador" fill className="object-cover" />
                 </div>
-              </div>
-              <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-24 h-24 sm:w-40 sm:h-40 rounded-full" style={{ backgroundColor: `${colors.primary}5` }}></div>
-            </div>
+                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.nadezhda.name")}</h3>
+                <p className="text-xs text-gray-500 mb-3">{getText("contact.nadezhda.region")}</p>
+                <div className="space-y-2 text-sm">
+                  <a href="tel:+41797613142" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
+                    <Phone className="w-4 h-4" /> +41 79 761 31 42
+                  </a>
+                  <a href="mailto:nds@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
+                    <Mail className="w-4 h-4" /> nds@sternenklar-lernen.ch
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Natascha Zoller - Circular photo */}
+            <Card className="border-0 shadow-md h-full">
+              <CardContent className="p-6 text-center">
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-gray-200 relative">
+                  <Image src="/images/natascha.webp" alt="Natascha Zoller" fill className="object-cover" />
+                </div>
+                <h3 className="font-serif font-semibold text-gray-800 mb-1">{getText("contact.natascha.name")}</h3>
+                <p className="text-xs text-gray-500 mb-3">{getText("contact.natascha.region")}</p>
+                <div className="space-y-2 text-sm">
+                  <a href="tel:+41792727024" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors">
+                    <Phone className="w-4 h-4" /> +41 79 272 70 24
+                  </a>
+                  <a href="mailto:nz@sternenklar-lernen.ch" className="flex items-center justify-center gap-2 text-gray-600 hover:text-[#4A7B6B] transition-colors break-all">
+                    <Mail className="w-4 h-4" /> nz@sternenklar-lernen.ch
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Impressum & Datenschutz Section - Dynamically shown/hidden */}
-      <div id="impressum">
-        {showLegal && legalContent}
-      </div>
+      {/* Legal Section */}
+      {showLegal && (
+        <section id="impressum" className="py-12 sm:py-16 md:py-20" style={{ backgroundColor: colors.lightGray }}>
+          <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-800 mb-3 sm:mb-4">{getText("legal.title")}</h2>
+              <div className="w-16 sm:w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: colors.primary }}></div>
+            </div>
+            <div className="space-y-6 sm:space-y-8">
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Angaben gemäss Art. 13 DSG</h3>
+                <p className="text-sm sm:text-base text-gray-600">sternenklar lernen</p>
+                <p className="text-sm sm:text-base text-gray-600 mt-1">Vertreten durch: Sandra Andermatt, Nadezhda De Salvador, Natascha Zoller</p>
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Kontaktinformationen</h3>
+                <div className="text-sm sm:text-base text-gray-600 space-y-1">
+                  <p>Sandra Andermatt: +41 79 810 57 72, sa@sternenklar-lernen.ch</p>
+                  <p>Nadezhda De Salvador: +41 79 761 31 42, nds@sternenklar-lernen.ch</p>
+                  <p>Natascha Zoller: +41 79 272 70 24, nz@sternenklar-lernen.ch</p>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Haftungsausschluss</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Die Inhalte dieser Website wurden mit grösstmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">Urheberrecht</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Die erstellten Inhalte unterliegen dem schweizerischen Urheberrecht.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
-      {/* Footer */}
+      {/* Footer - Extra Large Logo */}
       <footer style={{ backgroundColor: colors.primaryDark }}>
         <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="text-center">
-            <div className="mb-4 sm:mb-6">
-              <h3 className="text-xl sm:text-2xl font-serif text-white mb-1 sm:mb-2">Soulunaya</h3>
-              <p className="text-white/60 text-xs sm:text-sm">{t("sandra.andermatt")}</p>
+            <div className="flex justify-center mb-4">
+              <div className="relative w-20 h-20">
+                <Image src="/images/logo-1.png" alt="sternenklar lernen" fill className="object-contain brightness-0 invert" />
+              </div>
+            </div>
+            <div className="mb-4">
+              <h3 className="text-xl sm:text-2xl font-serif text-white mb-1">sternenklar lernen</h3>
+              <p className="text-white/60 text-xs sm:text-sm">Sandra Andermatt, Nadezhda De Salvador, Natascha Zoller</p>
             </div>
 
-            <div className="flex justify-center gap-4 sm:gap-6 mb-4 sm:mb-6">
-              <button onClick={() => scrollToSection("kontakt")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{t("contact.title")}</button>
-              <button onClick={toggleLegalSection} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{t("legal.title")}</button>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-4">
+              <button onClick={scrollToTop} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.home")}</button>
+              <button onClick={() => scrollToSection("angebote")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.offerings")}</button>
+              <button onClick={() => scrollToSection("about")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.about")}</button>
+              <button onClick={() => scrollToSection("conditions")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.conditions")}</button>
+              <button onClick={() => scrollToSection("kontakt")} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">{getText("nav.contact")}</button>
+              <button onClick={toggleLegalSection} className="text-white/70 hover:text-white transition-colors text-xs sm:text-sm">Rechtliches</button>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
-              <a href="tel:+41798105772" className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm">+41 79 810 57 72</a>
-              <span className="text-white/30 hidden sm:inline">|</span>
-              <a href="mailto:sandra.andermatt@psychologie.ch" className="text-white/60 hover:text-white transition-colors text-xs sm:text-sm break-words">sandra.andermatt@psychologie.ch</a>
-            </div>
-
-            <div className="border-t border-white/10 pt-4 sm:pt-6">
-              <p className="text-white/40 text-xs sm:text-sm">© 2026 Sandra Andermatt – {t("legal.title")}</p>
+            <div className="border-t border-white/10 pt-4">
+              <p className="text-white/40 text-xs sm:text-sm">{getText("footer.copyright")}</p>
             </div>
           </div>
         </div>
